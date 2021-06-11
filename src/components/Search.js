@@ -1,23 +1,24 @@
 import React from "react";
-
+//import '../main.scss';
 const Search = (props) => {
-    console.log(props);
   return (
-    <div>
+    <div className="searchbar">
       <input
         type="text"
-        id="header-search"
+        id="search-bar"
         placeholder="Search gifs"
-        name="s"
+        className="input"
       />
-      <button
-        onClick={() =>
-          props.search(document.getElementById("header-search").value)
-        }
-        type="submit"
-      >
-        Search
-      </button>
+      <div>
+        <button
+          onClick={() =>
+            props.search(document.getElementById("search-bar").value)
+          }
+          type="submit"
+        >
+          Search
+        </button>
+      </div>
     </div>
   );
 };
