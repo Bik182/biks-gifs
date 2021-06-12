@@ -8,7 +8,7 @@ const fetchGifs = () => {
   return (dispatch) => {
     dispatch(fetchGifSearchPending);
     fetch(
-      "https://api.giphy.com/v1/gifs/trending?api_key=uFHAA1e06SvDK4uTfO8jjReco4o5UdrB&limit=1&rating=g",
+      "https://api.giphy.com/v1/gifs/trending?api_key=uFHAA1e06SvDK4uTfO8jjReco4o5UdrB&limit=4&rating=g",
       {
         method: "GET",
         headers: {
@@ -19,7 +19,7 @@ const fetchGifs = () => {
       .then((res) => res.json())
       .then((json) => {
         if (json.meta.msg === "OK") {
-          console.log("ok");
+          console.log("trending gifs fetch success");
           dispatch(fetchGifSearchSuccess(json.data));
         } else {
           dispatch(fetchGifSearchError());

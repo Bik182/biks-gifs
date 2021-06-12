@@ -23,9 +23,9 @@ class Home extends React.Component {
     return (
       <div>
         <Search search={this.searchMethod}></Search>
-        <body className="homeBackground">
+        <div className="homeBackground">
           <GifDisplay data={this.props.gifs.gifsData}></GifDisplay>
-        </body>
+        </div>
       </div>
     );
   }

@@ -3,7 +3,6 @@ export const FETCH_GIF_SEARCH_PENDING = "FETCH_GIF_SEARCH_PENDING";
 export const FETCH_GIF_SEARCH_ERROR = "FETCH_GIF_SEARCH_ERROR";
 
 
-var tempListingId = 0;
 export function fetchGifSearchPending() {
     return {
         type: FETCH_GIF_SEARCH_PENDING,

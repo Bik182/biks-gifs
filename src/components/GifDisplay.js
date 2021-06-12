@@ -1,16 +1,27 @@
 import React from "react";
-
+import GifImage from "./GifImage";
 const GifDisplay = (props) => {
-    console.log("DATA: ",props.data);
   return (
     <div>
-      <h2>Gifs</h2>
-      {props?.data?.map((obj) => (
-        <div>
-          <p>{obj.title}</p>
-          <img alt={obj.title} src={obj.images.downsized.url} />
-        </div>
-      ))}
+      
+      <table className="trending-table">
+      <caption className="table-title">Trending Gifs</caption>
+        <tbody>
+          <tr>
+            {props?.data?.map((obj) => (
+              <td className="gif-tile" key={obj.id}>
+               
+                <GifImage
+                  title={obj.title}
+                  gif={obj.images.downsized.url}
+                  still={obj.images.downsized_still.url}
+                ></GifImage>
+              
+              </td>
+            ))}
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };

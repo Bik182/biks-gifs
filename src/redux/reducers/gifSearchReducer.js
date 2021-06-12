@@ -1,4 +1,4 @@
-import * as _ from "lodash";
+//import * as _ from "lodash";
 
 import {
   FETCH_GIF_SEARCH_SUCCESS,
@@ -28,25 +28,22 @@ export const gifSearchReducer = (state = initialState, action) => {
       };
     }
     case FETCH_GIF_SEARCH_SUCCESS: {
-     
-      var newState = {
+      return {
         ...state,
         fetchGifSearchError: false,
         fetchGifSearchPending: false,
         fetchGifSearchSuccess: true,
         gifsData: action.data,
       };
-      return newState;
     }
     case FETCH_GIF_SEARCH_ERROR: {
-      var newState = {
+      return {
         ...state,
         fetchGifSearchError: true,
         fetchGifSearchPending: false,
         fetchGifSearchSuccess: false,
         gifsData: [],
       };
-      return newState;
     }
     // Default
     default: {
