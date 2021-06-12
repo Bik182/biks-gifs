@@ -11,7 +11,7 @@ class Home extends React.Component {
     
   }
   componentDidMount() {
-     this.props.fetchGifs();
+     this.props.fetch();
    
   }
   searchMethod = (value) => {
@@ -43,7 +43,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      fetchGifs: fetchGifs,
+      fetch: fetchGifs,
     },
     dispatch
   );
