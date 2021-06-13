@@ -10,7 +10,7 @@ const GifDisplay = (props) => {
           <tr>
             {props?.data?.map((obj) => (
               <td className="gif-tile" key={obj.id}>
-                <a target="_blank" href={obj.url}>
+                <a target="_blank" rel="noopener noreferrer" href={obj.url}>
                   <GifImage
                     title={obj.title}
                     gif={obj.images.downsized.url}
