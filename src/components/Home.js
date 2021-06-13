@@ -6,10 +6,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    
-  }
+ 
   componentDidMount() {
      this.props.fetch();
    
