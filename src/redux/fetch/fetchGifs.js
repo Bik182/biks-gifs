@@ -4,7 +4,7 @@ import {
   fetchGifSearchError,
 } from "../actions/actions.js";
 
-const fetchGifs = () => {
+export function fetchGifs() {
   return (dispatch) => {
     dispatch(fetchGifSearchPending);
     fetch(
@@ -30,5 +30,4 @@ const fetchGifs = () => {
         dispatch(fetchGifSearchError());
       });
   };
-};
-export default fetchGifs;
+}

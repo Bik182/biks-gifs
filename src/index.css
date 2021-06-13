@@ -5,10 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: darkslategray;
 }
 
 .homeBackground {
-  background-color: darkslategray;
   margin: 0;
   display: flex;
   flex: 1;
@@ -28,6 +28,14 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.trending-table {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  padding: 2em;
+}
 .gif-img {
   display: block;
   width: 250px;
@@ -38,25 +46,20 @@ body {
 }
 .gif-img:hover {
   transform: scale(1.1);
-  opacity: 1.0;
+  opacity: 1;
   overflow: hidden;
+ 
 }
-.table-title{
+.table-title {
   font-size: 4em;
   color: black;
   align-self: flex-start;
 }
-.trending-table {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 2em;
-}
+
 .gif-tile {
   padding-right: 0.5em;
-  
 }
-.navbar{
+.navbar {
   padding-left: 2em;
 }
 .searchbar {
@@ -65,7 +68,7 @@ body {
   padding-left: 2em;
 }
 .input[type="text"] {
-  transition: width 0.4s ease-in-out;
+  transition: all 1.4s ease-in-out;
   height: 50px;
 }
 

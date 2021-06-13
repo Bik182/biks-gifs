@@ -9,7 +9,7 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <NavBar></NavBar>
+        {/* <NavBar></NavBar> */}
         <Switch>
           <Route component={Home} path="/" exact></Route>
         </Switch>

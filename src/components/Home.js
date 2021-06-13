@@ -1,7 +1,7 @@
 import React from "react";
 import Search from "./Search";
 import GifDisplay from "./GifDisplay";
-import fetchGifs from "../redux/fetch/fetchGifs";
+import {fetchGifs} from "../redux/fetch/fetchGifs";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
@@ -19,7 +19,7 @@ class Home extends React.Component {
    
     return (
       <div>
-        <Search search={this.searchMethod}></Search>
+        {/* <Search search={this.searchMethod}></Search> */}
         <div className="homeBackground">
           <GifDisplay data={this.props.gifs.gifsData}></GifDisplay>
         </div>
