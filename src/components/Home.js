@@ -18,12 +18,12 @@ class Home extends React.Component {
   render() {
    
     return (
-      <div>
+      <>
         {/* <Search search={this.searchMethod}></Search> */}
-        <div className="homeBackground">
+        <div className="container">
           <GifDisplay data={this.props.gifs.gifsData}></GifDisplay>
         </div>
-      </div>
+      </>
     );
   }
 }

@@ -3,26 +3,32 @@ import GifImage from "./GifImage";
 
 const GifDisplay = (props) => {
   return (
-    <div>
-      <table className="trending-table">
-        <caption className="table-title">Trending Gifs</caption>
-        <tbody>
-          <tr>
-            {props?.data?.map((obj) => (
-              <td className="gif-tile" key={obj.id}>
-                <a target="_blank" rel="noopener noreferrer" href={obj.url}>
-                  <GifImage
-                    title={obj.title}
-                    gif={obj.images.downsized.url}
-                    still={obj.images.downsized_still.url}
-                  ></GifImage>
-                </a>
-              </td>
-            ))}
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <>
+      {props?.data?.map((obj) => (
+        <GifImage
+          key={obj.id}
+          title={obj.title}
+          gif={obj.images.downsized.url}
+          still={obj.images.downsized_still.url}
+          url={obj.url}
+        ></GifImage>
+      ))}
+
+       {/* {props.data.length == 10 ? (
+        <GifImage
+          key={obj.id}
+          title={obj.title}
+          gif={obj.images.downsized.url}
+          still={obj.images.downsized_still.url}
+          url={obj.url}
+        ></GifImage>
+      ) : (
+        <div>
+          <h2>ERROR</h2>
+        </div>
+      )}
+      */}
+    </>
   );
 };
 
