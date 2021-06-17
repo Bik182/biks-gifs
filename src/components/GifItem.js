@@ -1,31 +1,33 @@
 import React, { useState } from "react";
 
-const GifImage = (props) => {
+const GifItem = (props) => {
   const [displayStill, setDisplay] = useState(true);
   let title = props.title;
   return (
-    <a
-      target="_blank"
-      rel="noopener noreferrer"
-      href={props.url}
-      className="item"
-      onMouseEnter={() => setDisplay(false)}
-      onMouseLeave={() => setDisplay(true)}
-    >
+    // <a
+    //   target="_blank"
+    //   rel="noopener noreferrer"
+    //   href={props.url}
+    //   className="item"
+    //   onMouseEnter={() => setDisplay(false)}
+    //   onMouseLeave={() => setDisplay(true)}
+    // >
+    <div className="item">
       {displayStill ? (
         <>
           <img className="gif-img" alt={props.title} src={props.still} />
-          <div className="gif-name">
+          {/* <div className="gif-name">
             {title.substring(0, title.indexOf("GIF"))}
-          </div>
+          </div> */}
         </>
       ) : (
         <>
           <img className="gif-img" alt={props.title} src={props.gif} />
         </>
       )}
-    </a>
+      </div>
+    // </a>
   );
 };
 
-export default GifImage;
+export default GifItem;

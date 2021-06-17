@@ -11,8 +11,6 @@ body {
 .homeBackground {
   display: flex;
   padding: 0 55px;
-  /* width: 100%;
-  height: 100%; */
 }
 .gif-container {
   position: relative;
@@ -22,30 +20,39 @@ body {
 
 .container {
   display: flex;
-  padding: 100px 55px;
-  
+  padding: 50px 55px;
+  margin-left: "auto";
+  margin-right: "auto";
 }
-.container:hover .item {
+/* .container:hover .item {
   transform: translateX(-25%);
-}
+} */
 .gif-name {
   font-weight: bold;
   font-size: 1em;
- 
-/*  
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
+  top: -50%;
+  left: -10%;
+  color: white;
+  position: relative;
+  text-decoration: none;
 }
 .item {
   position: relative;
+  text-decoration: none;
+
+  width: 250px;
+  height: 250px;
+  padding: 0;
   flex: 0 0 19.7%;
   text-align: center;
-  margin: 0 2px;
+  margin: 0;
   transition: transform 300ms ease 100ms;
 }
 .item:hover ~ .item {
   transform: translateX(25%);
+
+  padding: 0;
+  margin: 0;
 }
 .item:hover {
   transform: scale(1.5) !important;
@@ -55,8 +62,9 @@ body {
   width: 250px;
   height: 250px;
   transition: transform 0.5s ease, opacity 0.5s ease;
+  padding: 0;
+  margin: 0;
   opacity: 0.5;
-  /* object-fit: contain; */
 }
 .gif-img:hover {
   opacity: 1;
@@ -93,7 +101,6 @@ code {
     monospace;
 }
 
-
 .content {
   margin-top: 40px;
   height: 300px;
@@ -112,9 +119,9 @@ code {
 }
 
 .left:before {
-  content: '';
+  content: "";
   position: absolute;
-  background-image: linear-gradient(to right,#000,transparent);
+  background-image: linear-gradient(to right, #000, transparent);
   top: 0;
   bottom: 0;
   left: 100%;
@@ -133,5 +140,6 @@ code {
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 30px
+  padding: 30px;
 }
+

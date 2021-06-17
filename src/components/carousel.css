@@ -1,0 +1,92 @@
+.carousel-container {
+  width: 100%;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+.carousel-container > .right-button {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+.carousel-container:hover > .right-button {
+  visibility: visible;
+  opacity: 50%;
+}
+
+.carousel-container > .left-button {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+  }
+  .carousel-container:hover > .left-button {
+    visibility: visible;
+    opacity: 50%;
+  }
+
+.carousel-wrapper {
+  /* display: flex;
+    width: 100%;
+    position: relative; */
+}
+
+.carousel-content-wrapper {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-content {
+  flex-grow: 1;
+  display: flex;
+  overflow: hidden;
+  transition: all 250ms linear;
+  -ms-overflow-style: none; /* hide scrollbar in IE and Edge */
+  scrollbar-width: none; /* hide scrollbar in Firefox */
+}
+
+/* hide scrollbar in webkit browser */
+.carousel-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* .carousel-content > * {
+    width: 100%;
+    flex-shrink: 0;
+    flex-grow: 1;
+} */
+.button-wrapper {
+  position: absolute;
+  width: 5%;
+  height: 100%;
+  background-color: transparent;
+  opacity: 75%;
+}
+.left-button {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border-width: 0;
+  width: 2.5%;
+  height: 100%;
+  background-color: black;
+  opacity: 50%;
+}
+.right-button {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  border-width: 0;
+  width: 2.5%;
+  height: 100%;
+  background-color: black;
+  opacity: 50%;
+}
+
+.left-arrow {
+  left: 24px;
+}
+
+.right-arrow {
+  right: 24px;
+}
