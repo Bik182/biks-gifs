@@ -4,22 +4,27 @@ const GifImage = (props) => {
   const [displayStill, setDisplay] = useState(true);
   let title = props.title;
   return (
-    <div
+    <a
       onMouseEnter={() => setDisplay(false)}
       onMouseLeave={() => setDisplay(true)}
+      target="_blank"
+      className="display-item"
+      rel="noopener noreferrer"
+      href={props.url}
     >
       {displayStill ? (
-        <div className="gif-container">
+        <>
           <img className="gif-img" alt={props.title} src={props.still} />
-          <div className="gif-name">{title.substring(0,title.indexOf("GIF"))}</div>
-        </div>
+          <div className="gif-name">
+            {title.substring(0, title.indexOf("GIF"))}
+          </div>
+        </>
       ) : (
-        <div className="gif-container">
+        <>
           <img className="gif-img" alt={props.title} src={props.gif} />
-          
-        </div>
+        </>
       )}
-    </div>
+    </a>
   );
 };
 

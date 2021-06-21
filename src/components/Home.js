@@ -1,27 +1,35 @@
 import React from "react";
 import Search from "./Search";
 import GifDisplay from "./GifDisplay";
-import {fetchGifs} from "../redux/fetch/fetchGifs";
+import { fetchGifs } from "../redux/fetch/fetchGifs";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import GifImage from "./GifImage";
 
 class Home extends React.Component {
- 
   componentDidMount() {
-     this.props.fetch();
-   
+    this.props.fetch();
   }
   searchMethod = (value) => {
     console.log(value);
   };
 
   render() {
-   
     return (
       <div>
         {/* <Search search={this.searchMethod}></Search> */}
         <div className="homeBackground">
-          <GifDisplay data={this.props.gifs.gifsData}></GifDisplay>
+          <GifDisplay data={this.props.gifs.gifsData}>
+            {/* {this.props.gifs.gifsData.map((obj) => (
+              <GifImage
+                title={obj.title}
+                gif={obj.images.downsized.url}
+                still={obj.images.downsized_still.url}
+                url={obj.url}
+                key={obj.id}
+              ></GifImage>
+            ))} */}
+          </GifDisplay>
         </div>
       </div>
     );

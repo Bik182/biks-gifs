@@ -1,27 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
 import GifImage from "./GifImage";
 
 const GifDisplay = (props) => {
+  const { children } = props;
+  const [currIndex, setIndex] = useState(0);
+  const [showButtons, setShowButtons] = useState(false);
+
+  const length = props.data.length;
+
+  const next = () => {
+    console.log(currIndex);
+    if (currIndex < length / 4 - 1) {
+      setIndex((prevState) => prevState + 1);
+    }
+  };
+
+  const prev = () => {
+    if (currIndex > 0) {
+      setIndex((prevState) => prevState - 1);
+    }
+  };
+
   return (
-    <div>
-      <table className="trending-table">
-        <caption className="table-title">Trending Gifs</caption>
-        <tbody>
-          <tr>
-            {props?.data?.map((obj) => (
-              <td className="gif-tile" key={obj.id}>
-                <a target="_blank" rel="noopener noreferrer" href={obj.url}>
-                  <GifImage
-                    title={obj.title}
-                    gif={obj.images.downsized.url}
-                    still={obj.images.downsized_still.url}
-                  ></GifImage>
-                </a>
-              </td>
-            ))}
-          </tr>
-        </tbody>
-      </table>
+    <div className="display-container">
+      {currIndex > 0 && (
+        <button onClick={prev} className="left-button">
+          <i className="fa fa-chevron-left"></i>
+        </button>
+      )}
+      <div
+        className="display-wrapper"
+        style={{ transform: `translateX(-${currIndex * 1080}px)` }}
+      >
+        {props?.data?.map((obj) => (
+          <GifImage
+            title={obj.title}
+            gif={obj.images.downsized.url}
+            still={obj.images.downsized_still.url}
+            url={obj.url}
+            key={obj.id}
+          ></GifImage>
+        ))}
+      </div>
+
+      {currIndex < length / 4 - 1 && (
+        <button onClick={next} className="right-button">
+          
+          <i className="fa fa-chevron-right"></i>
+        </button>
+      )}
     </div>
   );
 };
