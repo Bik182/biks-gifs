@@ -45,7 +45,6 @@ const GifDisplay = (props) => {
 
       {currIndex < length / 4 - 1 && (
         <button onClick={next} className="right-button">
-          
           <i className="fa fa-chevron-right"></i>
         </button>
       )}

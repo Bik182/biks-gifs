@@ -1,37 +1,44 @@
 import React from "react";
 import Search from "./Search";
 import GifDisplay from "./GifDisplay";
-import { fetchGifs } from "../redux/fetch/fetchGifs";
+import { fetchGifs, bySearch } from "../redux/fetch/fetchGifs";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import GifImage from "./GifImage";
+import RandomGif from "./RandomGif";
 
 class Home extends React.Component {
   componentDidMount() {
     this.props.fetch();
+    this.props.search();
   }
   searchMethod = (value) => {
     console.log(value);
   };
-
+ 
   render() {
+     console.log(this.props.gifs);
     return (
       <div>
         {/* <Search search={this.searchMethod}></Search> */}
-        <div className="homeBackground">
-          <GifDisplay data={this.props.gifs.gifsData}>
-            {/* {this.props.gifs.gifsData.map((obj) => (
-              <GifImage
-                title={obj.title}
-                gif={obj.images.downsized.url}
-                still={obj.images.downsized_still.url}
-                url={obj.url}
-                key={obj.id}
-              ></GifImage>
-            ))} */}
+          <RandomGif></RandomGif>
+        <div className="gradient-container">
+        <div className="top-container">
+        </div>
+      
+        <div className="home-background">
+         
+          <h1 className="display-title">Trending</h1>
+          
+          <GifDisplay data={this?.props?.gifs?.trendingGifsData}>
+          
+          </GifDisplay>
+          <h1 className="display-title">Pizza</h1>
+            <GifDisplay data={this?.props?.gifs?.searchGifsData}>
+          
           </GifDisplay>
         </div>
       </div>
+        </div>
     );
   }
 }
@@ -49,6 +56,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       fetch: fetchGifs,
+      search: bySearch
     },
     dispatch
   );
