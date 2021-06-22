@@ -25,6 +25,7 @@ export function fetchGifs() {
           console.log("trending gifs fetch success");
           dispatch(fetchTrendingGifSuccess(json.data));
         } else {
+          console.log("ERRPR", json);
           dispatch(fetchTrendingGifError());
         }
       })

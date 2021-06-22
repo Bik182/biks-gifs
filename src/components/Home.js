@@ -17,7 +17,6 @@ class Home extends React.Component {
   };
  
   render() {
-     console.log(this.props.gifs);
     return (
       <div>
         {/* <Search search={this.searchMethod}></Search> */}
