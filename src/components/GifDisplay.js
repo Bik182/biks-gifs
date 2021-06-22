@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import GifImage from "./GifImage";
-
+import MoreGifs from "./MoreGifs";
 const GifDisplay = (props) => {
   const { children } = props;
   const [currIndex, setIndex] = useState(0);
@@ -41,6 +41,7 @@ const GifDisplay = (props) => {
             key={obj.id}
           ></GifImage>
         ))}
+        <MoreGifs url={props.getMore}></MoreGifs>
       </div>
 
       {currIndex < length / 4 - 1 && (
