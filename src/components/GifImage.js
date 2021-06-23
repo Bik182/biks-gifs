@@ -2,7 +2,8 @@ import React, { useState } from "react";
 
 const GifImage = (props) => {
   const [displayStill, setDisplay] = useState(true);
-  let title = props.title;
+  const title = props.title;
+  const size = props.gifSize;
   return (
     <a
       onMouseEnter={() => setDisplay(false)}
@@ -14,14 +15,24 @@ const GifImage = (props) => {
     >
       {displayStill ? (
         <>
-          <img className="gif-img" alt={props.title} src={props.still} />
+          <img
+            style={{ width: `${size}px`, height: `${size}px` }}
+            className="gif-img"
+            alt={props.title}
+            src={props.still}
+          />
           <div className="gif-name">
             {title.substring(0, title.indexOf("GIF"))}
           </div>
         </>
       ) : (
         <>
-          <img className="gif-img" alt={props.title} src={props.gif} />
+          <img
+            style={{ width: `${size}px`, height: `${size}px` }}
+            className="gif-img"
+            alt={props.title}
+            src={props.gif}
+          />
         </>
       )}
     </a>

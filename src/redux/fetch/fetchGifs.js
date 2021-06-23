@@ -11,7 +11,7 @@ export function fetchGifs() {
   return (dispatch) => {
     dispatch(fetchTrendingGifPending);
     fetch(
-      `https://api.giphy.com/v1/gifs/trending?api_key=${config.MY_KEY}&limit=10&rating=g`,
+      `https://api.giphy.com/v1/gifs/trending?api_key=${config.MY_KEY}&limit=25&rating=g`,
       {
         method: "GET",
         headers: {

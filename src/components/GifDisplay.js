@@ -1,16 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import GifImage from "./GifImage";
 import MoreGifs from "./MoreGifs";
+import useWindowDimensions from "./WindowDimensions.js";
 const GifDisplay = (props) => {
-  const { children } = props;
   const [currIndex, setIndex] = useState(0);
-  const [showButtons, setShowButtons] = useState(false);
+  const [touchPosition, setTouchPosition] = useState(null);
 
-  const length = props.data.length;
+  const { windowWidth } = useWindowDimensions();
 
+  const myRef = useRef();
+  const gifSize = props.gifSize;
+  const marginAndPadding = props.marginAndPadding;
+  const gifSizeMultiplier = gifSize + marginAndPadding;
+  const length = props.data.length + 1;
+  const newWidth =
+    Math.floor((windowWidth - marginAndPadding * 2) / gifSizeMultiplier) *
+    gifSizeMultiplier;
+  const numGifsPerSlide = (newWidth + marginAndPadding * 2) / gifSizeMultiplier;
+
+  const numOfSlides = Math.ceil(length / numGifsPerSlide);
   const next = () => {
     console.log(currIndex);
-    if (currIndex < length / 4 - 1) {
+    if (currIndex < numOfSlides - 1) {
       setIndex((prevState) => prevState + 1);
     }
   };
@@ -20,9 +31,41 @@ const GifDisplay = (props) => {
       setIndex((prevState) => prevState - 1);
     }
   };
+  const handleTouchStart = (e) => {
+    const touchDown = e.touches[0].clientX;
+    setTouchPosition(touchDown);
+  };
 
+  const handleTouchMove = (e) => {
+    const touchDown = touchPosition;
+
+    if (touchDown === null) {
+      return;
+    }
+
+    const currentTouch = e.touches[0].clientX;
+    const diff = touchDown - currentTouch;
+
+    if (diff > 5) {
+      next();
+    }
+
+    if (diff < -5) {
+      prev();
+    }
+
+    setTouchPosition(null);
+  };
   return (
-    <div className="display-container">
+    <div
+      style={{
+        padding: `${marginAndPadding}px`,
+        margin: `${marginAndPadding}px`,
+        width: `${newWidth}px`,
+      }}
+      ref={myRef}
+      className="display-container"
+    >
       {currIndex > 0 && (
         <button onClick={prev} className="left-button">
           <i className="fa fa-chevron-left"></i>
@@ -30,7 +73,11 @@ const GifDisplay = (props) => {
       )}
       <div
         className="display-wrapper"
-        style={{ transform: `translateX(-${currIndex * 1080}px)` }}
+        style={{
+          transform: `translateX(-${currIndex * newWidth}px)`,
+        }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
       >
         {props?.data?.map((obj) => (
           <GifImage
@@ -39,12 +86,13 @@ const GifDisplay = (props) => {
             still={obj.images.downsized_still.url}
             url={obj.url}
             key={obj.id}
+            gifSize={gifSize}
           ></GifImage>
         ))}
-        <MoreGifs url={props.getMore}></MoreGifs>
+        <MoreGifs gifSize={gifSize} url={props.getMore}></MoreGifs>
       </div>
 
-      {currIndex < length / 4 - 1 && (
+      {currIndex < numOfSlides - 1 && (
         <button onClick={next} className="right-button">
           <i className="fa fa-chevron-right"></i>
         </button>
