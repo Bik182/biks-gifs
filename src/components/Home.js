@@ -44,7 +44,7 @@ class Home extends React.Component {
   }
 }
 
-// Map State To Props (Redux Store Passes State To Component)
+// Map State To Props (Redux Store Passses State To Component)
 const mapStateToProps = (state) => {
   // Redux Store --> Component
   return {
