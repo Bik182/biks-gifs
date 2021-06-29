@@ -13,10 +13,11 @@ const GifDisplay = (props) => {
   const marginAndPadding = props.marginAndPadding;
   const gifSizeMultiplier = gifSize + marginAndPadding;
   const length = props.data.length + 1;
-  const newWidth =
+  let newWidth =
     Math.floor((windowWidth - marginAndPadding * 2) / gifSizeMultiplier) *
     gifSizeMultiplier;
-  const numGifsPerSlide = (newWidth + marginAndPadding * 2) / gifSizeMultiplier;
+ 
+  const numGifsPerSlide = newWidth / gifSizeMultiplier;
 
   const numOfSlides = Math.ceil(length / numGifsPerSlide);
   const next = () => {
@@ -56,6 +57,10 @@ const GifDisplay = (props) => {
 
     setTouchPosition(null);
   };
+  if (currIndex > numOfSlides - 1) {
+    setIndex(0);
+  }
+
   return (
     <div
       style={{

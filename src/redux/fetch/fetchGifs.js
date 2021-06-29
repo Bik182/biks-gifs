@@ -4,7 +4,7 @@ import {
   fetchTrendingGifError,
   fetchSearchGifPending,
   fetchSearchGifSuccess,
-  fetchSearchGifError
+  fetchSearchGifError,
 } from "../actions/actions.js";
 import config from "../../config.js";
 export function fetchGifs() {
@@ -15,7 +15,7 @@ export function fetchGifs() {
       {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": " application/x-www-form-urlencoded",
         },
       }
     )
@@ -45,7 +45,7 @@ export function bySearch(search) {
       {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": " application/x-www-form-urlencoded",
         },
       }
     )

@@ -19,11 +19,13 @@ body {
 
 .logo {
   object-fit: cover;
-  padding-left: 1%;
-  padding-top: 1%;
+  padding: 1%;
+ 
 }
 .home-background {
-  padding: 50px;
+  
+  display: flex;
+  flex-direction: column;
 }
 .top-container {
   display: block;
@@ -48,7 +50,7 @@ body {
     rgba(255, 0, 0, 0),
     #41424c
   );
-  position: absolute;
+  
   
  
   z-index: 0;
@@ -71,8 +73,7 @@ body {
   position: relative;
 
   overflow: hidden;
-  /* width: 1040px; */
-  /* height: 270px; */
+
   transition: all 500ms ease-in-out;
 }
 .display-container:hover > .left-button {
