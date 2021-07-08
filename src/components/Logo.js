@@ -5,6 +5,7 @@ const Logo = (props) => {
   const {  windowWidth } = useWindowDimensions();
 
   let currWidth = (1920 / windowWidth) * props.multiplier;
+  console.log(windowWidth);
   
   return (
     <div className="logo-wrapper">
