@@ -1,0 +1,32 @@
+.mobile-random-container {
+  z-index: -10;
+  position: absolute;
+  width: 100%;
+  height: 50%;
+}
+.mobile-logo-container{
+  display: flex;
+  flex-direction: column;
+}
+.mobile-gradient-container {
+  background-image: linear-gradient(
+    to top,
+    #41424c 55%,
+    rgba(255, 0, 0, 0),
+    #41424c
+  );
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.mobile-display-test {
+  background-color: white;
+  border: 1px solid black;
+ 
+}
+.mobile-main-container{
+  display: flex;
+  flex-direction: row;
+}

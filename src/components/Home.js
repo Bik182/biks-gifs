@@ -55,19 +55,27 @@ class Home extends React.Component {
         <MobileView>
         <div className="mobile-main-container">
           <RandomGif mobile="mobile-random-container"></RandomGif>
+
           <div className="mobile-gradient-container">
-            <Logo multiplier={10} source={logoPic}></Logo>
+          <div className="mobile-logo-container">
+
+           <Logo multiplier={10} source={logoPic}></Logo>
             <Logo multiplier={5} source={giphyLogo}></Logo>
           </div>
-          <div className="mobile-home-background">
-            <GifDisplay
+           
+       
+
+       
+            {/* <GifDisplay
               gifSize={250}
               marginAndPadding={20}
               getMore={"https://giphy.com/trending-gifs"}
               pending={this?.props?.gifs?.fetchTrendingGifPending}
               data={this?.props?.gifs?.trendingGifsData}
-            ></GifDisplay>
-          </div>
+            ></GifDisplay> */}
+            <div style={{width: '50px', height:'50px'}}className="mobile-display-test"></div>
+         
+   </div>
           </div>
         </MobileView>
       </div>
