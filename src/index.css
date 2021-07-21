@@ -9,23 +9,33 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: darkslategray;
   padding: 0;
+  border: 1px solid red;
+  
 }
-.main-container {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
+body > #root > div {
+  height: max-content;
 }
 
 .logo {
   object-fit: cover;
   padding: 1%;
- 
 }
-.home-background {
-  
+.main-container{
+  height: 1000px;
   display: flex;
   flex-direction: column;
+  
+}
+.home-container {
+ 
+  transition: all 500ms ease-in-out;
+}
+
+.home-container-hide {
+  transition: all 500ms ease-in-out;
+
+  opacity: 0;
+  pointer-events: none;
 }
 .top-container {
   display: block;
@@ -50,24 +60,19 @@ body {
     rgba(255, 0, 0, 0),
     #41424c
   );
-  position: absolute;
- 
-  z-index: 0;
+
 }
+
 .random-gif {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 .random-container {
-  z-index: -10;
-  position: absolute;
   width: 100%;
   height: 100%;
 }
-/* .opacity-box {
-  background-image: linear-gradient(to top, black, rgba(255, 0, 0, 0));
-} */
+
 .display-container {
   position: relative;
 
@@ -151,10 +156,10 @@ body {
 .navbar {
   padding-left: 2em;
 }
-.searchbar {
+.search-bar-container {
   display: block;
   flex: 1;
-  padding-left: 2em;
+  padding-left: 25px;
 }
 .input[type="text"] {
   transition: all 1.4s ease-in-out;

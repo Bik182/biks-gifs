@@ -87,8 +87,10 @@ const GifDisplay = (props) => {
         {props?.data?.map((obj) => (
           <GifImage
             title={obj.title}
-            gif={obj.images.downsized.url}
-            still={obj.images.downsized_still.url}
+            // gif={obj.images.downsized.url}
+            // still={obj.images.downsized_still.url}
+            gif={obj.gif}
+            still={obj.still}
             url={obj.url}
             key={obj.id}
             gifSize={gifSize}
