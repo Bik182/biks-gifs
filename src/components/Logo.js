@@ -7,14 +7,14 @@ const Logo = (props) => {
   let currWidth = (1920 / windowWidth) * props.multiplier;
   
   return (
-    <div className="logo-wrapper">
+    <>
       <img
         style={{ width: `${currWidth}%`, height: `${currWidth}%` }}
         className="logo"
         alt={"bik's gifs logo/ giphy logo"}
         src={props.source}
       ></img>
-    </div>
+    </>
   );
 };
 export default Logo;
