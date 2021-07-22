@@ -1,0 +1,25 @@
+.search-results {
+  display: flex;
+  flex-wrap: wrap;
+
+
+}
+
+.gif-item{
+    
+    
+}
+.gif-img {
+ 
+
+  opacity: 0.5;
+  object-fit: cover;
+  transition: all 500ms ease-in-out;
+  /* object-fit: contain; */
+}
+.gif-img:hover {
+  transform: scale(1.1);
+  opacity: 1;
+  overflow: hidden;
+  object-fit: contain;
+}
