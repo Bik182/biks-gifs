@@ -16,12 +16,11 @@ const GifDisplay = (props) => {
   let newWidth =
     Math.floor((windowWidth - marginAndPadding * 2) / gifSizeMultiplier) *
     gifSizeMultiplier;
- 
+
   const numGifsPerSlide = newWidth / gifSizeMultiplier;
 
   const numOfSlides = Math.ceil(length / numGifsPerSlide);
   const next = () => {
-    console.log(currIndex);
     if (currIndex < numOfSlides - 1) {
       setIndex((prevState) => prevState + 1);
     }
@@ -60,7 +59,6 @@ const GifDisplay = (props) => {
   if (currIndex > numOfSlides - 1) {
     setIndex(0);
   }
-
   return (
     <div
       style={{
@@ -87,10 +85,8 @@ const GifDisplay = (props) => {
         {props?.data?.map((obj) => (
           <GifImage
             title={obj.title}
-            // gif={obj.images.downsized.url}
-            // still={obj.images.downsized_still.url}
-            gif={obj.gif}
-            still={obj.still}
+            gif={obj.images.downsized.url}
+            still={obj.images.downsized_still.url}
             url={obj.url}
             key={obj.id}
             gifSize={gifSize}

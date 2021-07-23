@@ -10,78 +10,11 @@ import Logo from "./Logo";
 import logoPic from "../assets/logo-red.png";
 import useWindowDimensions from "./WindowDimensions.js";
 import moreGif from "../assets/more.gif";
+import searchStyle from "./searchStyles.css";
+import GifImage from "./GifImage";
+import { addSearchedData } from "../redux/actions/actions.js";
 import giphyLogo from "../assets/Poweredby_640px-Black_VertLogo.png";
 const fakeData = [
-  {
-    title: "title",
-    gif: moreGif,
-    still: moreGif,
-    key: 1,
-    url: "www.google.com",
-  },
-  {
-    title: "title",
-    gif: moreGif,
-    still: moreGif,
-    key: 1,
-    url: "www.google.com",
-  },
-  {
-    title: "title",
-    gif: moreGif,
-    still: moreGif,
-    key: 1,
-    url: "www.google.com",
-  },
-  {
-    title: "title",
-    gif: moreGif,
-    still: moreGif,
-    key: 1,
-    url: "www.google.com",
-  },
-  {
-    title: "title",
-    gif: moreGif,
-    still: moreGif,
-    key: 1,
-    url: "www.google.com",
-  },
-  {
-    title: "title",
-    gif: moreGif,
-    still: moreGif,
-    key: 1,
-    url: "www.google.com",
-  },
-  {
-    title: "title",
-    gif: moreGif,
-    still: moreGif,
-    key: 1,
-    url: "www.google.com",
-  },
-  {
-    title: "title",
-    gif: moreGif,
-    still: moreGif,
-    key: 1,
-    url: "www.google.com",
-  },
-  {
-    title: "title",
-    gif: moreGif,
-    still: moreGif,
-    key: 1,
-    url: "www.google.com",
-  },
-  {
-    title: "title",
-    gif: moreGif,
-    still: moreGif,
-    key: 1,
-    url: "www.google.com",
-  },
   {
     title: "title",
     gif: moreGif,
@@ -145,6 +78,7 @@ class Home extends React.Component {
     searchFocus: false,
     userSearched: false,
     userAdded: false,
+    textIsEmpty: true,
     width: 0,
     height: 0,
     defaultRandomGif:
@@ -152,7 +86,7 @@ class Home extends React.Component {
   };
 
   componentDidMount() {
-    // this.props.fetch();
+    this.props.fetch();
     // this.props.search();
 
     window.addEventListener("resize", this.updateDimensions);
@@ -160,12 +94,20 @@ class Home extends React.Component {
   updateDimensions = () => {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   };
-  searchMethod = (value) => {
-    if (value !== "") {
+  handleSearchEmpty = (textLength) => {
+    if (textLength <= 0) {
       this.setState({
-        searchText: value,
-        userSearched: true,
+        textIsEmpty: true,
       });
+    }
+  };
+  searchMethod = (value) => {
+    this.setState({
+      searchText: value,
+      userSearched: value == "" ? false : true,
+      textIsEmpty: value == "" ? true : false,
+    });
+    if (value !== "") {
       this.props.search(value);
     }
   };
@@ -177,11 +119,17 @@ class Home extends React.Component {
       searchFocus: !this.state.searchFocus,
     });
   };
+  handleAddToList = () => {
+    this.props.addData();
+    this.setState({
+      userSearched: false,
+    });
+  };
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateDimensions);
   }
   render() {
-    console.log("height " + this.state.height);
+    let num = 0;
 
     return (
       <>
@@ -194,6 +142,7 @@ class Home extends React.Component {
             <Search
               handleSearchClicked={this.handleSearchClicked}
               search={this.searchMethod}
+              handleSearchEmpty={this.handleSearchEmpty}
             ></Search>
           </div>
           <div
@@ -201,25 +150,58 @@ class Home extends React.Component {
               this.state.searchFocus ? "home-container-hide" : "home-container"
             }
           >
-            {this.state.userSearched ? (
+            {this.state.userSearched && !this.state.textIsEmpty ? (
               <>
                 <SearchResults
                   data={this.props.gifs.searchGifsData}
                   searchValue={this.state.searchText}
+                  addToList={this.handleAddToList}
+                  buttonEnabled={
+                    this.props.gifs.numSearchAdded == 5 ? false : true
+                  }
                 ></SearchResults>
               </>
             ) : (
               <>
-                <h1 className="display-title">Trending</h1>
+                {this.props.gifs?.parsedGifsData?.map((display) => {
+                  console.log("hey", display);
+                  let title =
+                    Object.keys(display)[0].charAt(0).toUpperCase() +
+                    Object.keys(display)[0].slice(1);
+                  return (
+                    <>
+                      <h1 className="display-title">{title}</h1>
+                      <GifDisplay
+                        gifSize={250}
+                        marginAndPadding={20}
+                        getMore={`https://giphy.com/${title}`}
+                        // pending={this?.props?.gifs?.fetchTrendingGifPending}
+                        data={Object.values(display)[0]}
+                      ></GifDisplay>
+                    </>
+                  );
+                })}
 
+                {/* <h1 className="display-title">One</h1>
                 <GifDisplay
                   gifSize={250}
                   marginAndPadding={20}
                   getMore={"https://giphy.com/trending-gifs"}
-                  pending={this?.props?.gifs?.fetchTrendingGifPending}
-                  // data={this?.props?.gifs?.trendingGifsData }
-                  data={fakeData}
+                  // pending={this?.props?.gifs?.fetchTrendingGifPending}
+                  data={this.props.gifs?.parsedGifsData?.trending ? this.props.gifs?.parsedGifsData?.trending:[]}
                 ></GifDisplay>
+                <h1 className="display-title">One</h1>
+                <GifDisplay
+                  gifSize={250}
+                  marginAndPadding={20}
+                  getMore={"https://giphy.com/trending-gifs"}
+                  // pending={this?.props?.gifs?.fetchTrendingGifPending}
+                  data={
+                    this.props.gifs?.parsedGifsData?.searched
+                      ? this.props.gifs?.parsedGifsData?.searched
+                      : []
+                  }
+                ></GifDisplay> */}
               </>
             )}
           </div>
@@ -244,6 +226,7 @@ const mapDispatchToProps = (dispatch) =>
       fetch: fetchGifs,
       search: bySearch,
       fetchRandom: getRandomGif,
+      addData: addSearchedData,
     },
     dispatch
   );

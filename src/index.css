@@ -7,9 +7,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: darkslategray;
+  background-color: darkslategray !important;
   padding: 0;
-  border: 1px solid red;
+  
   
 }
 body > #root > div {
@@ -133,7 +133,7 @@ body > #root > div {
   transition: transform 0.5s ease;
 }
 .display-item:hover {
-  transform: scale(1.1);
+  transform: scale(2.1);
 
   overflow: visible;
   z-index: 50;
@@ -147,7 +147,7 @@ body > #root > div {
   /* object-fit: contain; */
 }
 .gif-img:hover {
-  transform: scale(1.1);
+  transform: scale(5.1);
   opacity: 1;
   overflow: hidden;
   object-fit: contain;

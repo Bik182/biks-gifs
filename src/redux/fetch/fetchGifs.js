@@ -10,7 +10,8 @@ import {
   fetchRandomGifPending
 } from "../actions/actions.js";
 import config from "../../config.js";
-export function fetchGifs() {
+import {parseTrending} from "../helpers/CombineGifs";
+export function fetchGifs() { console.log("trending gifs fetch ");
   return (dispatch) => {
     dispatch(fetchTrendingGifPending);
     fetch(
@@ -26,7 +27,9 @@ export function fetchGifs() {
       .then((json) => {
         if (json.meta.msg === "OK") {
           console.log("trending gifs fetch success");
-          dispatch(fetchTrendingGifSuccess(json.data));
+          const parsedData = parseTrending(json.data);
+         
+          dispatch(fetchTrendingGifSuccess(parsedData));
         } else {
           console.log("ERRPR", json);
           dispatch(fetchTrendingGifError());
@@ -85,7 +88,7 @@ export function bySearch(search) {
       .then((json) => {
         if (json.meta.msg === "OK") {
           console.log("search gifs fetch success");
-          dispatch(fetchSearchGifSuccess(json.data));
+          dispatch(fetchSearchGifSuccess(json.data,search));
         } else {
           dispatch(fetchSearchGifError());
         }

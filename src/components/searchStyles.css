@@ -5,10 +5,33 @@
 
 }
 
-.gif-item{
-    
-    
+[class *="col"]{
+  
+  background-color: transparent !important;
+  border: none !important;
+
+  
 }
+[class *="card"]{
+  
+  background-color: transparent !important;
+  border: none !important;
+
+  
+}
+
+.display-item {
+  position: relative;
+  margin: 10px;
+  transition: transform 0.5s ease;
+}
+.display-item:hover {
+  transform: scale(1.1);
+
+  overflow: visible;
+  z-index: 50;
+}
+
 .gif-img {
  
 

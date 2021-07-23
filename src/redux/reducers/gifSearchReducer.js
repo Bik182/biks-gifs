@@ -1,4 +1,5 @@
 //import * as _ from "lodash";
+import { combineGifs } from "../helpers/CombineGifs";
 
 import {
   FETCH_TRENDING_GIF_SUCCESS,
@@ -10,6 +11,7 @@ import {
   FETCH_RANDOM_GIF_ERROR,
   FETCH_RANDOM_GIF_PENDING,
   FETCH_RANDOM_GIF_SUCCESS,
+  ADD_SEARCHED_DATA,
 } from "../actions/actions.js";
 
 // Initial State
@@ -22,6 +24,9 @@ export const initialState = {
   fetchGifSearchPending: null,
   trendingGifsData: [],
   searchGifsData: [],
+  parsedGifsData: [],
+  temporarySearchData: {},
+  numSearchAdded: 0,
 };
 // Reducers (Modifies The State And Returns A New State)
 export const gifSearchReducer = (state = initialState, action) => {
@@ -37,12 +42,14 @@ export const gifSearchReducer = (state = initialState, action) => {
       };
     }
     case FETCH_TRENDING_GIF_SUCCESS: {
+      console.log("succc , ", action.data);
       return {
         ...state,
         fetchTrendingGifError: false,
         fetchTrendingGifPending: false,
         fetchTrendingGifSuccess: true,
         trendingGifsData: action.data,
+        parsedGifsData: [action.data],
       };
     }
     case FETCH_TRENDING_GIF_ERROR: {
@@ -66,12 +73,26 @@ export const gifSearchReducer = (state = initialState, action) => {
       };
     }
     case FETCH_SEARCH_GIF_SUCCESS: {
+      const parsed = combineGifs(action.data, action.searchType);
+      console.log("oasd as", parsed);
       return {
         ...state,
         fetchSearchGifError: false,
         fetchSearchGifPending: false,
         fetchSearchGifSuccess: true,
         searchGifsData: action.data,
+
+        temporarySearchData: parsed,
+      };
+    }
+    case ADD_SEARCHED_DATA: {
+      const parsed = state.temporarySearchData;
+      const prevAdded = state.numSearchAdded + 1;
+      return {
+        ...state,
+        numSearchAdded: prevAdded,
+        temporarySearchData: {},
+        parsedGifsData: [...state.parsedGifsData, parsed],
       };
     }
     case FETCH_SEARCH_GIF_ERROR: {

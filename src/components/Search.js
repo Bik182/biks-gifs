@@ -20,7 +20,7 @@ const Search = (props) => {
         // onClick={props.handleSearchClicked}
         onFocus={props.handleSearchClicked}
         onBlur={props.handleSearchClicked}
-       
+        onChange={()=> props.handleSearchEmpty(document.getElementById("search-bar").value.length)}
       />
     </div>
   );

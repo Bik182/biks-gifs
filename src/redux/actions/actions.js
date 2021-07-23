@@ -10,6 +10,7 @@ export const FETCH_RANDOM_GIF_PENDING = "FETCH_RANDOM_GIF_PENDING";
 export const FETCH_RANDOM_GIF_SUCCESS = "FETCH_RANDOM_GIF_SUCCESS";
 export const FETCH_RANDOM_GIF_ERROR = "FETCH_RANDOM_GIF_ERROR";
 
+export const ADD_SEARCHED_DATA = "ADD_SEARCHED_DATA";
 export function fetchTrendingGifPending() {
   return {
     type: FETCH_TRENDING_GIF_PENDING,
@@ -32,10 +33,11 @@ export function fetchSearchGifPending() {
     type: FETCH_SEARCH_GIF_PENDING,
   };
 }
-export function fetchSearchGifSuccess(data) {
+export function fetchSearchGifSuccess(data, search) {
   return {
     type: FETCH_SEARCH_GIF_SUCCESS,
     data: data,
+    searchType: search
   };
 }
 export function fetchSearchGifError() {
@@ -59,5 +61,11 @@ export function fetchRandomGifSuccess(data) {
 export function fetchRandomGifError() {
   return {
     type: FETCH_RANDOM_GIF_ERROR,
+  };
+}
+export function addSearchedData() {
+  return {
+    type: ADD_SEARCHED_DATA,
+    
   };
 }
