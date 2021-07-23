@@ -3,7 +3,7 @@ import GifDisplay from "./GifDisplay";
 import MoreGifs from "./MoreGifs";
 
 import moreGif from "../assets/more.gif";
-import GifImageSearch from "./GifImageSearch";
+import GifImage from "./GifImage";
 
 import searchStyle from "./searchStyles.css";
 const SearchResults = (props) => {
@@ -65,13 +65,13 @@ const SearchResults = (props) => {
                 style={{ width: `auto`, height: `auto` }}
               >
                 <div className="card">
-                  <GifImageSearch
+                  <GifImage
                     title={obj.title}
                     gif={obj.images.original.url}
                     still={obj.images.original_still.url}
                     url={obj.url}
                     key={obj.id}
-                  ></GifImageSearch>
+                  ></GifImage>
                 </div>
               </div>
             );
@@ -83,7 +83,7 @@ const SearchResults = (props) => {
               <button
                 id="addButton"
                 type="button"
-                class="btn btn-secondary"
+                className="btn btn-secondary"
                 onClick={() => props.addToList()}
               >
                 <svg
@@ -101,7 +101,7 @@ const SearchResults = (props) => {
               <button
                 id="addButton"
                 type="button"
-                class="btn btn-secondary"
+                className="btn btn-secondary"
                 // onClick={() => props.addToList()}
                 disabled
               >
@@ -110,7 +110,7 @@ const SearchResults = (props) => {
                   width="64"
                   height="64"
                   fill="currentColor"
-                  class="bi bi-plus"
+                  className="bi bi-plus"
                   viewBox="0 0 16 16"
                 >
                   <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path>

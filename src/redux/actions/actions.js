@@ -11,6 +11,7 @@ export const FETCH_RANDOM_GIF_SUCCESS = "FETCH_RANDOM_GIF_SUCCESS";
 export const FETCH_RANDOM_GIF_ERROR = "FETCH_RANDOM_GIF_ERROR";
 
 export const ADD_SEARCHED_DATA = "ADD_SEARCHED_DATA";
+export const REMOVE_ADDED_TERM = "REMOVE_ADDED_TERM";
 export function fetchTrendingGifPending() {
   return {
     type: FETCH_TRENDING_GIF_PENDING,
@@ -68,4 +69,10 @@ export function addSearchedData() {
     type: ADD_SEARCHED_DATA,
     
   };
+}
+export function removeAddedTerm(term){
+  return{
+    type:REMOVE_ADDED_TERM,
+    term: term
+  }
 }

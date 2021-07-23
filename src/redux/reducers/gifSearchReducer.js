@@ -12,6 +12,7 @@ import {
   FETCH_RANDOM_GIF_PENDING,
   FETCH_RANDOM_GIF_SUCCESS,
   ADD_SEARCHED_DATA,
+  REMOVE_ADDED_TERM
 } from "../actions/actions.js";
 
 // Initial State
@@ -83,6 +84,18 @@ export const gifSearchReducer = (state = initialState, action) => {
         searchGifsData: action.data,
 
         temporarySearchData: parsed,
+      };
+    }
+    case REMOVE_ADDED_TERM: {
+      const newParsed = state.parsedGifsData.filter((obj) => {
+        return Object.keys(obj)[0].toLowerCase() != action.term.toLowerCase();
+      });
+      const prevAdded = state.numSearchAdded - 1;
+      return {
+        ...state,
+        numSearchAdded: prevAdded,
+
+        parsedGifsData: newParsed,
       };
     }
     case ADD_SEARCHED_DATA: {

@@ -12,7 +12,7 @@ import useWindowDimensions from "./WindowDimensions.js";
 import moreGif from "../assets/more.gif";
 import searchStyle from "./searchStyles.css";
 import GifImage from "./GifImage";
-import { addSearchedData } from "../redux/actions/actions.js";
+import { addSearchedData, removeAddedTerm } from "../redux/actions/actions.js";
 import giphyLogo from "../assets/Poweredby_640px-Black_VertLogo.png";
 const fakeData = [
   {
@@ -125,12 +125,18 @@ class Home extends React.Component {
       userSearched: false,
     });
   };
+  handleRemoveTerm = (term) => {
+    this.props.removeTerm(term);
+    this.setState({
+      userSearched: false,
+    });
+  };
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateDimensions);
   }
   render() {
     let num = 0;
-
+    console.log(this.props.gifs.parsedGifsData);
     return (
       <>
         <div className="top-container ">
@@ -170,14 +176,35 @@ class Home extends React.Component {
                     Object.keys(display)[0].slice(1);
                   return (
                     <>
+                    <div className="display-header">
                       <h1 className="display-title">{title}</h1>
+                      <button
+                        id="addButton"
+                        type="button"
+                        className="btn btn-secondary"
+                        onClick={() => this.handleRemoveTerm(title.toLowerCase())}
+                      >
+                     
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          className="bi bi-dash"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
+                        </svg>
+                      </button> </div>
                       <GifDisplay
                         gifSize={250}
                         marginAndPadding={20}
                         getMore={`https://giphy.com/${title}`}
+                        
                         // pending={this?.props?.gifs?.fetchTrendingGifPending}
                         data={Object.values(display)[0]}
                       ></GifDisplay>
+                      
                     </>
                   );
                 })}
@@ -227,6 +254,7 @@ const mapDispatchToProps = (dispatch) =>
       search: bySearch,
       fetchRandom: getRandomGif,
       addData: addSearchedData,
+      removeTerm: removeAddedTerm,
     },
     dispatch
   );
