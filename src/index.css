@@ -24,10 +24,21 @@ body {
 body > #root > div {
   height: max-content;
 }
-.simpson {
-  width: 100vh;
-  height: 100vh;
-  z-index: -1;
+
+.mobile-div{
+ 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.mobile-text{
+  min-height: 100px;
+  display: inline-flex;
+  align-items: center;
+  text-align: center;
+  color: white;
+  font-size: xx-large;
 }
 .logo {
   object-fit: cover;
@@ -49,9 +60,8 @@ body > #root > div {
   pointer-events: none;
 }
 .top-container {
-  display: block;
-  /* width: 100%;
-  height: 500px; */
+  display: flex;
+  flex-direction: column;
 }
 .search-container{
   display: flex;

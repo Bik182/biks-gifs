@@ -10,55 +10,14 @@ import Logo from "./Logo";
 import logoPic from "../assets/logo-red.png";
 import useWindowDimensions from "./WindowDimensions.js";
 import moreGif from "../assets/more.gif";
+import { MobileView , BrowserView } from "react-device-detect";
+
 import searchStyle from "./searchStyles.css";
 import GifImage from "./GifImage";
 import { addSearchedData, removeAddedTerm } from "../redux/actions/actions.js";
 import giphyLogo from "../assets/Poweredby_640px-Black_VertLogo.png";
 import homePic from "../assets/home.png";
-const fakeData = [
-  {
-    title: "title",
-    gif: moreGif,
-    still: moreGif,
-    key: 1,
-    url: "www.google.com",
-  },
-  {
-    title: "title",
-    gif: moreGif,
-    still: moreGif,
-    key: 1,
-    url: "www.google.com",
-  },
-  {
-    title: "title",
-    gif: moreGif,
-    still: moreGif,
-    key: 1,
-    url: "www.google.com",
-  },
-  {
-    title: "title",
-    gif: moreGif,
-    still: moreGif,
-    key: 1,
-    url: "www.google.com",
-  },
-  {
-    title: "title",
-    gif: moreGif,
-    still: moreGif,
-    key: 1,
-    url: "www.google.com",
-  },
-  {
-    title: "title",
-    gif: moreGif,
-    still: moreGif,
-    key: 1,
-    url: "www.google.com",
-  },
-];
+
 const style = {
   backgroundImage:
     "url(" +
@@ -155,6 +114,14 @@ class Home extends React.Component {
     let num = 0;
     return (
       <>
+       <MobileView>
+        <div className="mobile-div">
+         <Logo multiplier={10} source={logoPic}></Logo>
+         <Logo multiplier={5} source={giphyLogo}></Logo>
+          <span className="mobile-text"> Please use a laptop/desktop browser, mobile coming soon-ish :)</span>
+          </div>
+        </MobileView> 
+          <BrowserView>
         <div className="top-container ">
           <Logo multiplier={20} source={logoPic}></Logo>
           <Logo multiplier={10} source={giphyLogo}></Logo>
@@ -285,7 +252,9 @@ class Home extends React.Component {
               </>
             )}
           </div>
+          
         </div>
+         </BrowserView>
       </>
     );
   }
