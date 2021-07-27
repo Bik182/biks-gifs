@@ -64,10 +64,10 @@ export function fetchRandomGifError() {
     type: FETCH_RANDOM_GIF_ERROR,
   };
 }
-export function addSearchedData() {
+export function addSearchedData(term) {
   return {
     type: ADD_SEARCHED_DATA,
-    
+    term: term
   };
 }
 export function removeAddedTerm(term){

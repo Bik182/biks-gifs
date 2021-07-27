@@ -2,15 +2,13 @@ import * as _ from "lodash";
 
 export function checkContains(data, id) {
   _.forEach(data, (obj) => {
-    if (id == obj.id) {
-      console.log("true");
+    if (id === obj.id) {
       return true;
     }
-    console.log("looop");
   });
   return false;
 }
-export function combineGifs(data, searchType) {
+export function parseGifs(data, searchType) {
   const parsed = {
     [searchType]: _.map(data, (object) => {
       return parseObject(object);
@@ -18,14 +16,7 @@ export function combineGifs(data, searchType) {
   };
   return parsed;
 }
-export function parseTrending(data) {
-  const parsedData = {
-    trending: _.map(data, (object) => {
-      return parseObject(object);
-    }),
-  };
-  return parsedData;
-}
+
 
 function parseObject(obj) {
   return {

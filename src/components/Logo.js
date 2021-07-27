@@ -7,7 +7,7 @@ const Logo = (props) => {
   let currWidth = (1920 / windowWidth) * props.multiplier;
   
   return (
-    <div className="logo-wrapper">
+    <div className={props.diffClass ? props.diffClass : "logo-wrapper"}>
       <img
         style={{ width: `${currWidth}%`, height: `${currWidth}%` }}
         className="logo"

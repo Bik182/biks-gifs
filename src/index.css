@@ -7,27 +7,38 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: darkslategray !important;
+  background-color: #41424C !important;
   padding: 0;
-  
-  
+  /* background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: linear-gradient(
+      0deg,
+      rgba(47, 79, 79, 1) 90%,
+      rgba(47, 79, 79, 0) 95%,
+      rgba(47, 79, 79, 1) 100%
+    ),
+    url("https://media4.giphy.com/media/ASd0Ukj0y3qMM/giphy.gif?cid=ecf05e47ukeeoewe3120bohcs5fcic0ryzs6e3tifymg1qlf&rid=giphy.gif&ct=g") !important; W3C */
 }
+
 body > #root > div {
   height: max-content;
 }
-
+.simpson {
+  width: 100vh;
+  height: 100vh;
+  z-index: -1;
+}
 .logo {
   object-fit: cover;
   padding: 1%;
 }
-.main-container{
+.main-container {
   height: 1000px;
   display: flex;
   flex-direction: column;
-  
 }
 .home-container {
- 
   transition: all 500ms ease-in-out;
 }
 
@@ -41,6 +52,28 @@ body > #root > div {
   display: block;
   /* width: 100%;
   height: 500px; */
+}
+.search-container{
+  display: flex;
+  flex-direction: row;
+  padding-left: 25px;
+}
+.home-icon-button{
+  opacity: .50;
+  
+  border: none;
+}
+.home-icon-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+.home-logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 }
 .display-title {
   margin-left: 20px;
@@ -60,17 +93,43 @@ body > #root > div {
     rgba(255, 0, 0, 0),
     #41424c
   );
-
 }
-.display-header{
+.display-header {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.btn-secondary{
-  height: fit-content;
+
+.btn-secondary {
+  height: max-content;
   margin-left: 1rem;
+  width: max-content;
+  display: flex;
+  align-items: center;
+  transition: all 500ms ease-in-out;
 }
+.btn-home span {
+  cursor: pointer;
+  display: none;
+  
+  transition: all 500ms ease-in-out;
+}
+
+.btn-home span:after {
+  content: "Remove?";
+  
+}
+
+.btn-home:hover span {
+ 
+  display:  inline-flex;
+}
+
+.btn-home:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
 .random-gif {
   width: 100%;
   height: 100%;
@@ -167,7 +226,7 @@ body > #root > div {
 .search-bar-container {
   display: block;
   flex: 1;
-  padding-left: 25px;
+  padding-left: 5px;
 }
 .input[type="text"] {
   transition: all 1.4s ease-in-out;

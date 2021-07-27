@@ -7,11 +7,11 @@ import {
   fetchSearchGifError,
   fetchRandomGifSuccess,
   fetchRandomGifError,
-  fetchRandomGifPending
+  fetchRandomGifPending,
 } from "../actions/actions.js";
 import config from "../../config.js";
-import {parseTrending} from "../helpers/CombineGifs";
-export function fetchGifs() { console.log("trending gifs fetch ");
+import { parseGifs } from "../helpers/CombineGifs";
+export function fetchGifs() {
   return (dispatch) => {
     dispatch(fetchTrendingGifPending);
     fetch(
@@ -27,8 +27,8 @@ export function fetchGifs() { console.log("trending gifs fetch ");
       .then((json) => {
         if (json.meta.msg === "OK") {
           console.log("trending gifs fetch success");
-          const parsedData = parseTrending(json.data);
-         
+          const parsedData = parseGifs(json.data, "trending");
+
           dispatch(fetchTrendingGifSuccess(parsedData));
         } else {
           console.log("ERRPR", json);
@@ -42,8 +42,8 @@ export function fetchGifs() { console.log("trending gifs fetch ");
   };
 }
 
-export function getRandomGif(){
- return (dispatch) => {
+export function getRandomGif() {
+  return (dispatch) => {
     dispatch(fetchRandomGifPending);
     fetch(
       `https://api.giphy.com/v1/gifs/random?api_key=${config.MY_KEY}&rating=g`,
@@ -60,7 +60,6 @@ export function getRandomGif(){
           console.log("trending gifs fetch success");
           dispatch(fetchRandomGifSuccess(json.data));
         } else {
-          console.log("ERRPR", json);
           dispatch(fetchRandomGifError());
         }
       })
@@ -72,11 +71,10 @@ export function getRandomGif(){
 }
 
 export function bySearch(search) {
- 
   return (dispatch) => {
     dispatch(fetchSearchGifPending);
     fetch(
-      `https://api.giphy.com/v1/gifs/search?q=${search}&api_key=${config.MY_KEY}&limit=6&rating=g`,
+      `https://api.giphy.com/v1/gifs/search?q=${search}&api_key=${config.MY_KEY}&limit=7&rating=g`,
       {
         method: "GET",
         headers: {
@@ -88,7 +86,7 @@ export function bySearch(search) {
       .then((json) => {
         if (json.meta.msg === "OK") {
           console.log("search gifs fetch success");
-          dispatch(fetchSearchGifSuccess(json.data,search));
+          dispatch(fetchSearchGifSuccess(json.data, search));
         } else {
           dispatch(fetchSearchGifError());
         }

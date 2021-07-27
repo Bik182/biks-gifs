@@ -14,6 +14,7 @@ import searchStyle from "./searchStyles.css";
 import GifImage from "./GifImage";
 import { addSearchedData, removeAddedTerm } from "../redux/actions/actions.js";
 import giphyLogo from "../assets/Poweredby_640px-Black_VertLogo.png";
+import homePic from "../assets/home.png";
 const fakeData = [
   {
     title: "title",
@@ -79,6 +80,7 @@ class Home extends React.Component {
     userSearched: false,
     userAdded: false,
     textIsEmpty: true,
+    canAdd: true,
     width: 0,
     height: 0,
     defaultRandomGif:
@@ -99,6 +101,10 @@ class Home extends React.Component {
       this.setState({
         textIsEmpty: true,
       });
+    } else {
+      this.setState({
+        textIsEmpty: false,
+      });
     }
   };
   searchMethod = (value) => {
@@ -106,10 +112,21 @@ class Home extends React.Component {
       searchText: value,
       userSearched: value == "" ? false : true,
       textIsEmpty: value == "" ? true : false,
+      canAdd: true,
     });
     if (value !== "") {
+      if (this.props.gifs.addedTerms.includes(value)) {
+        this.setState({
+          canAdd: false,
+        });
+      }
       this.props.search(value);
     }
+  };
+  goHome = () => {
+    this.setState({
+      userSearched: false,
+    });
   };
   randomMethod = () => {
     this.props.fetchRandom();
@@ -119,24 +136,23 @@ class Home extends React.Component {
       searchFocus: !this.state.searchFocus,
     });
   };
-  handleAddToList = () => {
-    this.props.addData();
+  handleAddToList = (value) => {
+    this.props.addData(value);
     this.setState({
       userSearched: false,
     });
   };
   handleRemoveTerm = (term) => {
-    this.props.removeTerm(term);
     this.setState({
       userSearched: false,
     });
+    this.props.removeTerm(term);
   };
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateDimensions);
   }
   render() {
     let num = 0;
-    console.log(this.props.gifs.parsedGifsData);
     return (
       <>
         <div className="top-container ">
@@ -145,15 +161,43 @@ class Home extends React.Component {
         </div>
         <div className="main-container">
           <div className="search-container">
+            {this.state.userSearched && !this.state.textIsEmpty ? (
+              <button
+                onClick={this.goHome}
+                id="home-button"
+                className="home-icon-button"
+                type="submit"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#000000"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+              </button>
+            ) : (
+              <></>
+            )}
             <Search
               handleSearchClicked={this.handleSearchClicked}
               search={this.searchMethod}
               handleSearchEmpty={this.handleSearchEmpty}
             ></Search>
           </div>
+
           <div
             className={
-              this.state.searchFocus ? "home-container-hide" : "home-container"
+              this.state.searchFocus && !this.state.textIsEmpty
+                ? "home-container-hide"
+                : "home-container"
             }
           >
             {this.state.userSearched && !this.state.textIsEmpty ? (
@@ -163,49 +207,58 @@ class Home extends React.Component {
                   searchValue={this.state.searchText}
                   addToList={this.handleAddToList}
                   buttonEnabled={
-                    this.props.gifs.numSearchAdded == 5 ? false : true
+                    this.props.gifs.numSearchAdded == 5 || !this.state.canAdd
+                      ? false
+                      : true
                   }
                 ></SearchResults>
               </>
             ) : (
               <>
-                {this.props.gifs?.parsedGifsData?.map((display) => {
-                  console.log("hey", display);
+                <div className="home-logo">
+                  <Logo
+                    diffClass="home-icon-wrapper"
+                    multiplier={10}
+                    source={homePic}
+                  ></Logo>
+                </div>
+                {this.props.gifs?.parsedGifsData?.map((display, key) => {
                   let title =
                     Object.keys(display)[0].charAt(0).toUpperCase() +
                     Object.keys(display)[0].slice(1);
                   return (
-                    <>
-                    <div className="display-header">
-                      <h1 className="display-title">{title}</h1>
-                      <button
-                        id="addButton"
-                        type="button"
-                        className="btn btn-secondary"
-                        onClick={() => this.handleRemoveTerm(title.toLowerCase())}
-                      >
-                     
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          className="bi bi-dash"
-                          viewBox="0 0 16 16"
+                    <div key={key}>
+                      <div className="display-header">
+                        <h1 className="display-title">{title}</h1>
+                        <button
+                          id="addButton"
+                          type="button"
+                          className="btn btn-secondary btn-home"
+                          onClick={() =>
+                            this.handleRemoveTerm(title.toLowerCase())
+                          }
                         >
-                          <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
-                        </svg>
-                      </button> </div>
+                          <span> </span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            className="bi bi-dash"
+                            viewBox="0 0 16 16"
+                          >
+                            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
+                          </svg>
+                        </button>{" "}
+                      </div>
                       <GifDisplay
                         gifSize={250}
                         marginAndPadding={20}
                         getMore={`https://giphy.com/${title}`}
-                        
                         // pending={this?.props?.gifs?.fetchTrendingGifPending}
                         data={Object.values(display)[0]}
                       ></GifDisplay>
-                      
-                    </>
+                    </div>
                   );
                 })}
 

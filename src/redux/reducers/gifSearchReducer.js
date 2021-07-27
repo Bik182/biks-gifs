@@ -1,5 +1,5 @@
 //import * as _ from "lodash";
-import { combineGifs } from "../helpers/CombineGifs";
+import { parseGifs } from "../helpers/CombineGifs";
 
 import {
   FETCH_TRENDING_GIF_SUCCESS,
@@ -23,11 +23,11 @@ export const initialState = {
   fetchGifSearchError: null,
   fetchGifSearchSuccess: null,
   fetchGifSearchPending: null,
-  trendingGifsData: [],
   searchGifsData: [],
   parsedGifsData: [],
   temporarySearchData: {},
   numSearchAdded: 0,
+  addedTerms:[]
 };
 // Reducers (Modifies The State And Returns A New State)
 export const gifSearchReducer = (state = initialState, action) => {
@@ -43,13 +43,12 @@ export const gifSearchReducer = (state = initialState, action) => {
       };
     }
     case FETCH_TRENDING_GIF_SUCCESS: {
-      console.log("succc , ", action.data);
       return {
         ...state,
         fetchTrendingGifError: false,
         fetchTrendingGifPending: false,
         fetchTrendingGifSuccess: true,
-        trendingGifsData: action.data,
+        addedTerms:["trending"],
         parsedGifsData: [action.data],
       };
     }
@@ -59,7 +58,7 @@ export const gifSearchReducer = (state = initialState, action) => {
         fetchTrendingGifError: true,
         fetchTrendingGifPending: false,
         fetchTrendingGifSuccess: false,
-        trendingGifsData: [],
+       
       };
     }
 
@@ -74,8 +73,7 @@ export const gifSearchReducer = (state = initialState, action) => {
       };
     }
     case FETCH_SEARCH_GIF_SUCCESS: {
-      const parsed = combineGifs(action.data, action.searchType);
-      console.log("oasd as", parsed);
+      const parsed = parseGifs(action.data, action.searchType);
       return {
         ...state,
         fetchSearchGifError: false,
@@ -88,13 +86,15 @@ export const gifSearchReducer = (state = initialState, action) => {
     }
     case REMOVE_ADDED_TERM: {
       const newParsed = state.parsedGifsData.filter((obj) => {
-        return Object.keys(obj)[0].toLowerCase() != action.term.toLowerCase();
+        return Object.keys(obj)[0].toLowerCase() !== action.term.toLowerCase();
       });
       const prevAdded = state.numSearchAdded - 1;
+      const index = state.addedTerms.indexOf(action.term.toLowerCase());
+      const newTerms = state.addedTerms.splice(index,1);
       return {
         ...state,
         numSearchAdded: prevAdded,
-
+      
         parsedGifsData: newParsed,
       };
     }
@@ -106,6 +106,7 @@ export const gifSearchReducer = (state = initialState, action) => {
         numSearchAdded: prevAdded,
         temporarySearchData: {},
         parsedGifsData: [...state.parsedGifsData, parsed],
+         addedTerms: [...state.addedTerms, action.term],
       };
     }
     case FETCH_SEARCH_GIF_ERROR: {
@@ -129,7 +130,6 @@ export const gifSearchReducer = (state = initialState, action) => {
       };
     }
     case FETCH_RANDOM_GIF_SUCCESS: {
-      console.log("FETCH_SEARCH_GIF_SUCCESS :", Object.keys(action.data));
       return {
         ...state,
         fetchRandomGifError: false,
