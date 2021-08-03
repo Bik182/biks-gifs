@@ -12,7 +12,7 @@ import {
   FETCH_RANDOM_GIF_PENDING,
   FETCH_RANDOM_GIF_SUCCESS,
   ADD_SEARCHED_DATA,
-  REMOVE_ADDED_TERM
+  REMOVE_ADDED_TERM,
 } from "../actions/actions.js";
 
 // Initial State
@@ -27,7 +27,7 @@ export const initialState = {
   parsedGifsData: [],
   temporarySearchData: {},
   numSearchAdded: 0,
-  addedTerms:[]
+  addedTerms: [],
 };
 // Reducers (Modifies The State And Returns A New State)
 export const gifSearchReducer = (state = initialState, action) => {
@@ -48,8 +48,8 @@ export const gifSearchReducer = (state = initialState, action) => {
         fetchTrendingGifError: false,
         fetchTrendingGifPending: false,
         fetchTrendingGifSuccess: true,
-        addedTerms:["trending"],
-        parsedGifsData: [action.data],
+        addedTerms: ["trending", ...state.addedTerms],
+        parsedGifsData: [...state.parsedGifsData, action.data],
       };
     }
     case FETCH_TRENDING_GIF_ERROR: {
@@ -58,7 +58,6 @@ export const gifSearchReducer = (state = initialState, action) => {
         fetchTrendingGifError: true,
         fetchTrendingGifPending: false,
         fetchTrendingGifSuccess: false,
-       
       };
     }
 
@@ -90,11 +89,11 @@ export const gifSearchReducer = (state = initialState, action) => {
       });
       const prevAdded = state.numSearchAdded - 1;
       const index = state.addedTerms.indexOf(action.term.toLowerCase());
-      const newTerms = state.addedTerms.splice(index,1);
+      const newTerms = state.addedTerms.splice(index, 1);
       return {
         ...state,
         numSearchAdded: prevAdded,
-      
+
         parsedGifsData: newParsed,
       };
     }
@@ -106,7 +105,8 @@ export const gifSearchReducer = (state = initialState, action) => {
         numSearchAdded: prevAdded,
         temporarySearchData: {},
         parsedGifsData: [...state.parsedGifsData, parsed],
-         addedTerms: [...state.addedTerms, action.term],
+        addedTerms: [...state.addedTerms, action.term],
+        searchGifsData: []
       };
     }
     case FETCH_SEARCH_GIF_ERROR: {
@@ -148,9 +148,8 @@ export const gifSearchReducer = (state = initialState, action) => {
       };
     }
     // Default
-    default: {
+    default:
       return state;
-    }
   }
 };
 

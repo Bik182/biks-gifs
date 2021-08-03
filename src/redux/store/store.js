@@ -3,26 +3,23 @@ import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 //import initialState from "../reducers/index.js";
 // Imports: Redux
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
 import rootReducer from "../reducers/index.js";
-// Middleware: Redux Persist Config
-// const persistConfig = {
-//     // Root
-//     key: "root",
-//     // Storage Method (React Native)
-//     storage: AsyncStorage,
-//     // Whitelist (Save Specific Reducers)
-//     whitelist: ["authReducer"],
-//     // Blacklist (Don't Save Specific Reducers)
-//     blacklist: [],
-// };
-// Middleware: Redux Persist Persisted Reducer
-//const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const persistConfig = {
+  key: 'root',
+  storage: storage,
+  whitelist: ['gifSearchReducer'] // which reducer want to store
+};
+const pReducer = persistReducer(persistConfig, rootReducer);
 
 const middlewares = [thunk];
 
 // Redux: Store
-const store = createStore(rootReducer, applyMiddleware(...middlewares));
-// Middleware: Redux Persist Persister
-//let persistor = persistStore(store);
-// Exports
-export default store;
+const store = createStore(pReducer, applyMiddleware(...middlewares));
+
+const persistor = persistStore(store);
+
+export  {store, persistor};

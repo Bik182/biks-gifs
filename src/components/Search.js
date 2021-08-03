@@ -12,9 +12,9 @@ const Search = (props) => {
     window.addEventListener("keyup", handleKeyUp);
 
     return () => window.removeEventListener("keyup", handleKeyUp);
-  }, []);
+  });
   return (
-    <div className="search-bar-container">
+    <div className="search-bar-container width:10px">
       <button
         onClick={() =>
           props.search(document.getElementById("search-bar").value)
@@ -30,7 +30,7 @@ const Search = (props) => {
         id="search-bar"
         placeholder="Search gifs"
         className="input"
-        // onClick={props.handleSearchClicked}
+       
         onFocus={props.handleSearchClicked}
         onBlur={props.handleSearchClicked}
         onChange={() =>

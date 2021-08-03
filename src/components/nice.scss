@@ -1,31 +1,30 @@
-@import url("./assets/font-awesome-4.7.0/css/font-awesome.css");
+@import url("../assets/font-awesome-4.7.0/css/font-awesome.css");
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #76c9ad !important;
-  padding: 0;
-  /* background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: linear-gradient(
-      0deg,
-      rgba(47, 79, 79, 1) 90%,
-      rgba(47, 79, 79, 0) 95%,
-      rgba(47, 79, 79, 1) 100%
-    ),
-    url("https://media4.giphy.com/media/ASd0Ukj0y3qMM/giphy.gif?cid=ecf05e47ukeeoewe3120bohcs5fcic0ryzs6e3tifymg1qlf&rid=giphy.gif&ct=g") !important; W3C */
-}
+$myColor: #59bfa9;
 
-body > #root > div {
-  height: max-content;
+.display-container-wrapper:hover {
+  background-color: darken($myColor, 10%);
 }
+.display-container-wrapper {
+  margin-right: 0.5%;
+  margin-left: 0.5%;
+  transition: all 1000ms ease-in-out;
+  
 
+  position: relative;
+}
+.home-icon-button {
+  opacity: 0.5;
+  transition: all 500ms ease-in-out;
+
+  border: none;
+}
+.home-icon-button:hover {
+  opacity: 1;
+
+  border: none;
+}
 .mobile-div {
   display: flex;
   flex-direction: column;
@@ -51,10 +50,16 @@ body > #root > div {
 .logo-text {
   font-family: "Fredoka One", cursive;
   font-size: 10rem;
+  margin-right: 0.5%;
+  margin-left: 0.5%;
+  margin-bottom: 1%;
 }
 .home-text {
   font-family: "Fredoka One", cursive;
   font-size: 5rem;
+  border-bottom: 0.5rem solid darken($myColor, 10%);
+  padding: 0.1%;
+  border-radius: 1rem;
 }
 .main-container {
   height: 1000px;
@@ -89,11 +94,7 @@ body > #root > div {
   flex-direction: row;
   margin-left: 0.5%;
 }
-.home-icon-button {
-  opacity: 0.5;
 
-  border: none;
-}
 .home-icon-wrapper {
   display: flex;
   justify-content: center;
@@ -103,6 +104,9 @@ body > #root > div {
   display: flex;
   justify-content: center;
   align-items: center;
+  
+  
+  
 }
 .display-title {
   margin-left: 20px;
@@ -147,8 +151,6 @@ body > #root > div {
 
 .btn-home span:after {
   content: "Remove?";
-  font-family: "Fredoka One", cursive;
-  color: black;
 }
 
 .btn-home:hover span {
@@ -262,16 +264,33 @@ body > #root > div {
 .input[type="text"] {
   transition: all 1.4s ease-in-out;
   height: 50px;
-  border: 0;
-
 }
 
 .input[type="text"]:focus {
   width: 25%;
-  
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+.slanted-div-wrapper{
+  width: auto;
+  height: auto;
+  position: relative;
+
+}
+.slanted-div-wrapper::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 50%;
+  height: 100%;
+  
+  background-color:darken($myColor, 10%);
+  -webkit-clip-path: polygon(25% 0%, 100% 0, 100% 50%, 90% 100%, 0 100%, 0 0);
+  clip-path: polygon( 100% 0, 100% 0%, 0% 100%, 0 100%, 0 0);
 }

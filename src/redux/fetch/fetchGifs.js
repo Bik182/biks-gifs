@@ -74,7 +74,7 @@ export function bySearch(search) {
   return (dispatch) => {
     dispatch(fetchSearchGifPending);
     fetch(
-      `https://api.giphy.com/v1/gifs/search?q=${search}&api_key=${config.MY_KEY}&limit=7&rating=g`,
+      `https://api.giphy.com/v1/gifs/search?q=${search}&api_key=${config.MY_KEY}&limit=16&rating=g`,
       {
         method: "GET",
         headers: {

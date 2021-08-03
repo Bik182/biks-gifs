@@ -1,10 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+
+$myColor: #59bfa9;
+
 .search-results {
   display: flex;
   flex-wrap: wrap;
-
-
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
-
+.search-text {
+  font-family: "Fredoka One", cursive;
+  font-size: 4rem;
+  border-bottom: 0.5rem solid darken($myColor, 10%);
+  padding: 0.1%;
+  border-radius: 1rem;
+  white-space: nowrap;
+}
 [class *="col"]{
   
   background-color: transparent !important;
@@ -20,6 +32,15 @@
   
 }
 
+
+.btn-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.row{
+  justify-content: center;
+}
 .display-item {
   position: relative;
   margin: 10px;
@@ -50,9 +71,9 @@
 
 
 .btn-secondary{
-  height: max-content;
+  
   margin-left: 1rem;
-  width: max-content;
+  
   display: flex;
   transition: all 500ms ease-in-out;
   align-items: center;
@@ -66,6 +87,8 @@
 
 .btn-search-result span:after {
   content: "Add to Home Screen?";
+  font-family: "Fredoka One", cursive;
+
 }
 
 .btn-search-result:hover span {

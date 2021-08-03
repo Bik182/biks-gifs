@@ -2,13 +2,13 @@ import React, { useState, useRef } from "react";
 import GifImage from "./GifImage";
 import MoreGifs from "./MoreGifs";
 import useWindowDimensions from "./WindowDimensions.js";
+import "./nice.scss";
 const GifDisplay = (props) => {
   const [currIndex, setIndex] = useState(0);
   const [touchPosition, setTouchPosition] = useState(null);
 
   const { windowWidth } = useWindowDimensions();
 
-  const myRef = useRef();
   const gifSize = props.gifSize;
   const marginAndPadding = props.marginAndPadding;
   const gifSizeMultiplier = gifSize + marginAndPadding;
@@ -59,47 +59,59 @@ const GifDisplay = (props) => {
   if (currIndex > numOfSlides - 1) {
     setIndex(0);
   }
+
   return (
     <div
       style={{
-        padding: `${marginAndPadding}px`,
-        margin: `${marginAndPadding}px`,
-        width: `${newWidth}px`,
+        // WebkitClipPath: `polygon(25% 0%, 100% 0, 100% 25%, ${((newWidth /windowWidth)*100)}% 100%, 0 100%, 0 0)`,
+        // ClipPath: "polygon(25% 0%, 100% 0, 100% 50%, 90% 100%, 0 100%, 0 0)",
+        WebkitClipPath: `polygon(25% 0%, 100% 0, 100% 50%,  ${((newWidth /windowWidth)*100)}% 100%, 0 100%, 0 0)`,
+        ClipPath: `polygon(55% 0%, 100% 0, 100% 50%, ${((newWidth /windowWidth)*100)}% 100%, 0 100%, 0 0)`
       }}
-      ref={myRef}
-      className="display-container"
+      className="display-container-wrapper"
     >
-      {currIndex > 0 && (
-        <button onClick={prev} className="left-button">
-          <i className="fa fa-chevron-left"></i>
-        </button>
-      )}
+      
       <div
-        className="display-wrapper"
         style={{
-          transform: `translateX(-${currIndex * newWidth}px)`,
+          padding: `${marginAndPadding}px`,
+          margin: `${marginAndPadding}px`,
+          width: `${newWidth}px`,
         }}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
+        className="display-container"
       >
-        {props?.data?.map((obj) => (
-          <GifImage
-            title={obj.title}
-            gif={obj.images.downsized.url}
-            still={obj.images.downsized_still.url}
-            url={obj.url}
-            key={obj.id}
-            gifSize={gifSize}
-          ></GifImage>
-        ))}
-        <MoreGifs gifSize={gifSize} url={props.getMore}></MoreGifs>
-      </div>
+        {currIndex > 0 && (
+          <button onClick={prev} className="left-button">
+            <i className="fa fa-chevron-left"></i>
+          </button>
+        )}
+        <div
+          className="display-wrapper"
+          style={{
+            transform: `translateX(-${currIndex * newWidth}px)`,
+          }}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+        >
+          {props?.data?.map((obj) => (
+            <GifImage
+              title={obj.title}
+              gif={obj.images.downsized.url}
+              still={obj.images.downsized_still.url}
+              url={obj.url}
+              key={obj.id}
+              gifSize={gifSize}
+            ></GifImage>
+          ))}
+          <MoreGifs gifSize={gifSize} url={props.getMore}></MoreGifs>
+        </div>
 
-      {currIndex < numOfSlides - 1 && (
-        <button onClick={next} className="right-button">
-          <i className="fa fa-chevron-right"></i>
-        </button>
-      )}
+        {currIndex < numOfSlides - 1 && (
+          <button onClick={next} className="right-button">
+            <i className="fa fa-chevron-right"></i>
+          </button>
+        )}
+      </div>
+     
     </div>
   );
 };
