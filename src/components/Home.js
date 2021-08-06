@@ -13,7 +13,6 @@ import { connect } from "react-redux";
 import Logo from "./Logo";
 import { MobileView, BrowserView } from "react-device-detect";
 
-import GifImage from "./GifImage";
 import { addSearchedData, removeAddedTerm } from "../redux/actions/actions.js";
 import giphyLogo from "../assets/Poweredby_640px-Black_VertLogo.png";
 import "./styles/home.scss";
@@ -98,7 +97,6 @@ class Home extends React.Component {
     window.removeEventListener("resize", this.updateDimensions);
   }
   render() {
-    console.log("this: ", this.props.gifs);
     return (
       <>
         <MobileView>

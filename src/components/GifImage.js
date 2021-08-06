@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import VoteComponent from "./VoteComponent";
 import "./styles/gif.scss";
 import "./styles/searchStyles.scss";
 const GifImage = (props) => {
@@ -36,7 +35,6 @@ const GifImage = (props) => {
             src={props.gif}
           />
 
-          {/* <VoteComponent></VoteComponent> */}
         </>
       )}
     </a>

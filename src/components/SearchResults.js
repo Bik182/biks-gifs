@@ -1,16 +1,8 @@
-import React, { useState } from "react";
-import GifDisplay from "./GifDisplay";
-import MoreGifs from "./MoreGifs";
-import loadingGif from "../assets/minion.gif";
-import moreGif from "../assets/more.gif";
+import React from "react";
 import GifImage from "./GifImage";
-
-import searchStyle from "./styles/searchStyles.scss";
+import "./styles/searchStyles.scss";
 const SearchResults = (props) => {
-  const [displayStill, setDisplay] = useState(true);
-  let title =
-    props.searchValue[0].charAt(0).toUpperCase() +
-    props.searchValue[0].slice(1);
+ 
   return (
     <div className="search-results">
       {props.data.length <= 0 ? (
@@ -23,7 +15,6 @@ const SearchResults = (props) => {
           <div className="container my-5">
             <div className="row">
               {props.data.slice(0, 5).map((obj, key) => {
-                let size = 250 + Math.floor(Math.random() * 250);
 
                 return (
                   <div

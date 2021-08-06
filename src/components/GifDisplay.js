@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import GifImage from "./GifImage";
 import MoreGifs from "./MoreGifs";
 import useWindowDimensions from "./WindowDimensions.js";

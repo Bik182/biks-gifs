@@ -90,8 +90,6 @@ export const gifSearchReducer = (state = initialState, action) => {
         return Object.keys(obj)[0].toLowerCase() !== action.term.toLowerCase();
       });
       const prevAdded = state.numSearchAdded - 1;
-      const index = state.addedTerms.indexOf(action.term.toLowerCase());
-      const newTerms = state.addedTerms.splice(index, 1);
       return {
         ...state,
         numSearchAdded: prevAdded,

@@ -81,6 +81,7 @@ $myColor: #59bfa9;
 .input[type="text"] {
   transition: all 1.4s ease-in-out;
   height: 50px;
+  border: none;
 }
 
 .input[type="text"]:focus {

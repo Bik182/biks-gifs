@@ -11,7 +11,7 @@ import {
   fetchUserTermSuccess
 } from "../actions/actions.js";
 import config from "../../config.js";
-import { parseGifs,parseTrending } from "../helpers/CombineGifs";
+import {parseTrending } from "../helpers/CombineGifs";
 export function fetchGifs() {
   return (dispatch) => {
     dispatch(fetchTrendingGifPending);
