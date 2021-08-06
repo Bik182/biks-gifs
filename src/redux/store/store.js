@@ -11,7 +11,7 @@ import rootReducer from "../reducers/index.js";
 const persistConfig = {
   key: 'root',
   storage: storage,
-  whitelist: ['gifSearchReducer'] // which reducer want to store
+  whitelist: ['userReducer'] // which reducer want to store
 };
 const pReducer = persistReducer(persistConfig, rootReducer);
 

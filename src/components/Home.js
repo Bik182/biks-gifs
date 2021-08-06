@@ -2,7 +2,12 @@ import React from "react";
 import Search from "./Search";
 import GifDisplay from "./GifDisplay";
 import SearchResults from "./SearchResults";
-import { fetchGifs, bySearch, getRandomGif } from "../redux/fetch/fetchGifs";
+import {
+  fetchGifs,
+  bySearch,
+  getRandomGif,
+  fetchTerms,
+} from "../redux/fetch/fetchGifs";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import Logo from "./Logo";
@@ -11,10 +16,9 @@ import { MobileView, BrowserView } from "react-device-detect";
 import GifImage from "./GifImage";
 import { addSearchedData, removeAddedTerm } from "../redux/actions/actions.js";
 import giphyLogo from "../assets/Poweredby_640px-Black_VertLogo.png";
-import "./nice.scss";
+import "./styles/home.scss";
 
 class Home extends React.Component {
-  
   state = {
     searchText: "",
     searchFocus: false,
@@ -29,12 +33,9 @@ class Home extends React.Component {
   };
 
   componentDidMount() {
-    if(!this.props.gifs.addedTerms.includes("trending")){
     this.props.fetch();
-
-    }
-    // this.props.search();
-
+    this.props.fetchInitialTerms(this.props.user.userTerms);
+    
     window.addEventListener("resize", this.updateDimensions);
   }
   updateDimensions = () => {
@@ -52,7 +53,7 @@ class Home extends React.Component {
     }
   };
   searchMethod = (value) => {
-    const newVal = value.replace(/\W/g, "");
+    const newVal = value.replace(/\W/g, "").toLowerCase();
     this.setState({
       searchText: newVal,
       userSearched: newVal === "" ? false : true,
@@ -60,7 +61,7 @@ class Home extends React.Component {
       canAdd: true,
     });
     if (newVal !== "") {
-      if (this.props.gifs.addedTerms.includes(newVal)) {
+      if (this.props.user.userTerms.includes(newVal) || newVal === "trending") {
         this.setState({
           canAdd: false,
         });
@@ -97,6 +98,7 @@ class Home extends React.Component {
     window.removeEventListener("resize", this.updateDimensions);
   }
   render() {
+    console.log("this: ", this.props.gifs);
     return (
       <>
         <MobileView>
@@ -160,7 +162,6 @@ class Home extends React.Component {
             >
               {this.state.userSearched && !this.state.textIsEmpty ? (
                 <>
-                  
                   <SearchResults
                     data={this.props.gifs.searchGifsData}
                     searchValue={this.state.searchText}
@@ -177,6 +178,19 @@ class Home extends React.Component {
                   <div className="home-logo">
                     <h1 className="home-text"> Home </h1>
                   </div>
+                  <div>
+                    <div className="display-header">
+                      <h1 className="display-title">Trending</h1>
+                    </div>
+
+                    <GifDisplay
+                      gifSize={250}
+                      marginAndPadding={20}
+                      getMore={`https://giphy.com/trending`}
+                      // pending={this?.props?.gifs?.fetchTrendingGifPending}
+                      data={this.props.gifs?.trendingData}
+                    ></GifDisplay>
+                  </div>
                   {this.props.gifs?.parsedGifsData?.map((display, key) => {
                     let title =
                       Object.keys(display)[0].charAt(0).toUpperCase() +
@@ -186,7 +200,6 @@ class Home extends React.Component {
                         <div className="display-header">
                           <h1 className="display-title">{title}</h1>
                           <button
-                            hidden={title === "Trending" ? true : false}
                             type="button"
                             className="btn btn-secondary btn-home"
                             onClick={() =>
@@ -206,8 +219,7 @@ class Home extends React.Component {
                             </svg>
                           </button>{" "}
                         </div>
-                    
-      
+
                         <GifDisplay
                           gifSize={250}
                           marginAndPadding={20}
@@ -215,8 +227,7 @@ class Home extends React.Component {
                           // pending={this?.props?.gifs?.fetchTrendingGifPending}
                           data={Object.values(display)[0]}
                         ></GifDisplay>
-                        </div>
-                      
+                      </div>
                     );
                   })}
                 </>
@@ -234,6 +245,7 @@ const mapStateToProps = (state) => {
   // Redux Store --> Component
   return {
     gifs: state.gifSearchReducer,
+    user: state.userReducer,
   };
 };
 
@@ -242,6 +254,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       fetch: fetchGifs,
+      fetchInitialTerms: fetchTerms,
       search: bySearch,
       fetchRandom: getRandomGif,
       addData: addSearchedData,

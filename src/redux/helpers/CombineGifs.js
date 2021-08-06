@@ -16,7 +16,11 @@ export function parseGifs(data, searchType) {
   };
   return parsed;
 }
-
+export function parseTrending(data) {
+  return _.map(data, (object) => {
+    return parseObject(object);
+  });
+}
 
 function parseObject(obj) {
   return {

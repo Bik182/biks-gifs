@@ -1,0 +1,132 @@
+$myColor: #59bfa9;
+.mobile-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.display-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.display-title {
+  margin-left: 20px;
+  font-family: "Fredoka One", cursive;
+  font-size: 3rem;
+  color: white;
+}
+.top-container {
+  display: flex;
+  flex-direction: column;
+}
+.search-container {
+  display: flex;
+  flex-direction: row;
+  margin-left: 0.5%;
+}
+.home-container {
+  transition: all 500ms ease-in-out;
+}
+
+.home-container-hide {
+  transition: all 500ms ease-in-out;
+
+  opacity: 0;
+  pointer-events: none;
+}
+
+.main-container {
+  height: 1000px;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  background-color: transparent;
+}
+.slanted-div-wrapper {
+  width: auto;
+  height: auto;
+  position: relative;
+}
+.slanted-div-wrapper::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 50%;
+  height: 100%;
+
+  background-color: darken($myColor, 10%);
+  -webkit-clip-path: polygon(25% 0%, 100% 0, 100% 50%, 90% 100%, 0 100%, 0 0);
+  clip-path: polygon(100% 0, 100% 0%, 0% 100%, 0 100%, 0 0);
+}
+.logo-text {
+  font-family: "Fredoka One", cursive;
+  font-size: 10rem;
+  margin-right: 0.5%;
+  margin-left: 0.5%;
+  margin-bottom: 1%;
+}
+.mobile-text {
+  min-height: 100px;
+  display: inline-flex;
+  align-items: center;
+  text-align: center;
+  color: white;
+  font-size: xx-large;
+}
+.home-text {
+  font-family: "Fredoka One", cursive;
+  font-size: 5rem;
+  border-bottom: 0.5rem solid darken($myColor, 10%);
+  padding: 0.1%;
+  border-radius: 1rem;
+}
+.home-icon-button {
+  opacity: 0.5;
+  transition: all 500ms ease-in-out;
+
+  border: none;
+}
+.home-icon-button:hover {
+  opacity: 1;
+
+  border: none;
+}
+
+.btn-secondary {
+  height: max-content;
+  margin-left: 1rem;
+  width: max-content;
+  display: flex;
+  align-items: center;
+  transition: all 500ms ease-in-out;
+}
+.btn-home span {
+  cursor: pointer;
+  display: none;
+
+  transition: all 500ms ease-in-out;
+}
+
+.btn-home span:after {
+  content: "Remove?";
+  font-family: "Fredoka One", cursive;
+  color: black;
+}
+
+.btn-home:hover span {
+  display: inline-flex;
+}
+
+.btn-home:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+.home-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

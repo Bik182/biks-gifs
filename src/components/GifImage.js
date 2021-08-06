@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-
+import VoteComponent from "./VoteComponent";
+import "./styles/gif.scss";
+import "./styles/searchStyles.scss";
 const GifImage = (props) => {
   const [displayStill, setDisplay] = useState(true);
   const title = props.title;
@@ -8,8 +10,8 @@ const GifImage = (props) => {
     <a
       onMouseEnter={() => setDisplay(false)}
       onMouseLeave={() => setDisplay(true)}
-      target="_blank"
       className="display-item"
+      target="_blank"
       rel="noopener noreferrer"
       href={props.url}
     >
@@ -33,6 +35,8 @@ const GifImage = (props) => {
             alt={props.title}
             src={props.gif}
           />
+
+          {/* <VoteComponent></VoteComponent> */}
         </>
       )}
     </a>

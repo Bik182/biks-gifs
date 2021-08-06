@@ -13,6 +13,7 @@ import {
   FETCH_RANDOM_GIF_SUCCESS,
   ADD_SEARCHED_DATA,
   REMOVE_ADDED_TERM,
+  ADD_USER_DATA
 } from "../actions/actions.js";
 
 // Initial State
@@ -28,6 +29,7 @@ export const initialState = {
   temporarySearchData: {},
   numSearchAdded: 0,
   addedTerms: [],
+  trendingData:[]
 };
 // Reducers (Modifies The State And Returns A New State)
 export const gifSearchReducer = (state = initialState, action) => {
@@ -48,8 +50,8 @@ export const gifSearchReducer = (state = initialState, action) => {
         fetchTrendingGifError: false,
         fetchTrendingGifPending: false,
         fetchTrendingGifSuccess: true,
-        addedTerms: ["trending", ...state.addedTerms],
-        parsedGifsData: [...state.parsedGifsData, action.data],
+        
+        trendingData:action.data
       };
     }
     case FETCH_TRENDING_GIF_ERROR: {
@@ -106,7 +108,14 @@ export const gifSearchReducer = (state = initialState, action) => {
         temporarySearchData: {},
         parsedGifsData: [...state.parsedGifsData, parsed],
         addedTerms: [...state.addedTerms, action.term],
-        searchGifsData: []
+        searchGifsData: [],
+      };
+    }
+    case ADD_USER_DATA: {
+      const parsed = parseGifs(action.data, action.searchType);
+      return {
+        ...state,
+        parsedGifsData: [...state.parsedGifsData, parsed],
       };
     }
     case FETCH_SEARCH_GIF_ERROR: {

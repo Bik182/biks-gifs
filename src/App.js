@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./components/Home";
 import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store/store.js";
-import NavBar from "./components/NavBar";
 import { PersistGate } from 'redux-persist/integration/react'
 
 function App() {
@@ -12,7 +11,7 @@ function App() {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
-          {/* <NavBar></NavBar> */}
+          
           <Switch>
             <Route component={Home} path="/" exact></Route>
           </Switch>

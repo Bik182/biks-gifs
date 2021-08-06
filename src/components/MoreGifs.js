@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-
+import "./styles/searchStyles.scss";
+import "./styles/gif.scss";
 const MoreGifs = (props) => {
   const [displayStill, setDisplay] = useState(true);
   const size = props.gifSize;

@@ -1,0 +1,33 @@
+.gif-name {
+  position: absolute;
+  font-weight: bold;
+  font-size: 1em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+}
+.gif-img {
+  opacity: 0.5;
+  object-fit: cover;
+  transition: all 500ms ease-in-out;
+}
+.gif-img:hover {
+  transform: scale(1.1);
+  opacity: 1;
+  overflow: hidden;
+  object-fit: contain;
+}
+
+
+.gif-name {
+  position: absolute;
+  font-weight: bold;
+  font-size: 1em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+}

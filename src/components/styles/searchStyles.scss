@@ -17,28 +17,21 @@ $myColor: #59bfa9;
   border-radius: 1rem;
   white-space: nowrap;
 }
-[class *="col"]{
-  
+[class*="col"] {
   background-color: transparent !important;
   border: none !important;
-
-  
 }
-[class *="card"]{
-  
+[class*="card"] {
   background-color: transparent !important;
   border: none !important;
-
-  
 }
 
-
-.btn-wrapper{
+.btn-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.row{
+.row {
   justify-content: center;
 }
 .display-item {
@@ -52,28 +45,15 @@ $myColor: #59bfa9;
   overflow: visible;
   z-index: 50;
 }
-
-.gif-img {
- 
-
-  opacity: 0.5;
-  object-fit: cover;
-  transition: all 500ms ease-in-out;
-  /* object-fit: contain; */
-}
-.gif-img:hover {
-  transform: scale(1.1);
-  opacity: 1;
-  overflow: hidden;
-  object-fit: contain;
+.search-bar-container {
+  display: block;
+  flex: 1;
+  padding-left: 5px;
 }
 
-
-
-.btn-secondary{
-  
+.btn-secondary {
   margin-left: 1rem;
-  
+
   display: flex;
   transition: all 500ms ease-in-out;
   align-items: center;
@@ -88,7 +68,6 @@ $myColor: #59bfa9;
 .btn-search-result span:after {
   content: "Add to Home Screen?";
   font-family: "Fredoka One", cursive;
-
 }
 
 .btn-search-result:hover span {
@@ -98,4 +77,12 @@ $myColor: #59bfa9;
 .btn-search-result:hover span:after {
   opacity: 1;
   right: 0;
+}
+.input[type="text"] {
+  transition: all 1.4s ease-in-out;
+  height: 50px;
+}
+
+.input[type="text"]:focus {
+  width: 25%;
 }

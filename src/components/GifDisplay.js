@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import GifImage from "./GifImage";
 import MoreGifs from "./MoreGifs";
 import useWindowDimensions from "./WindowDimensions.js";
-import "./nice.scss";
+import "./styles/gifDisplay.scss";
 const GifDisplay = (props) => {
   const [currIndex, setIndex] = useState(0);
   const [touchPosition, setTouchPosition] = useState(null);
@@ -59,18 +59,18 @@ const GifDisplay = (props) => {
   if (currIndex > numOfSlides - 1) {
     setIndex(0);
   }
-
   return (
     <div
       style={{
-        // WebkitClipPath: `polygon(25% 0%, 100% 0, 100% 25%, ${((newWidth /windowWidth)*100)}% 100%, 0 100%, 0 0)`,
-        // ClipPath: "polygon(25% 0%, 100% 0, 100% 50%, 90% 100%, 0 100%, 0 0)",
-        WebkitClipPath: `polygon(25% 0%, 100% 0, 100% 50%,  ${((newWidth /windowWidth)*100)}% 100%, 0 100%, 0 0)`,
-        ClipPath: `polygon(55% 0%, 100% 0, 100% 50%, ${((newWidth /windowWidth)*100)}% 100%, 0 100%, 0 0)`
+        WebkitClipPath: `polygon(25% 0%, 100% 0, 100% 50%,  ${
+          (newWidth / windowWidth) * 100
+        }% 100%, 0 100%, 0 0)`,
+        ClipPath: `polygon(55% 0%, 100% 0, 100% 50%, ${
+          (newWidth / windowWidth) * 100
+        }% 100%, 0 100%, 0 0)`,
       }}
       className="display-container-wrapper"
     >
-      
       <div
         style={{
           padding: `${marginAndPadding}px`,
@@ -111,7 +111,6 @@ const GifDisplay = (props) => {
           </button>
         )}
       </div>
-     
     </div>
   );
 };

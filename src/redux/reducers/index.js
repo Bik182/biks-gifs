@@ -2,17 +2,13 @@
 import { combineReducers } from "redux";
 // Imports: Reducers
 import gifSearchReducer from "./gifSearchReducer.js";
-import { initialState as gifSearchReducerInitial } from "./gifSearchReducer.js";
+import userReducer from "./userReducer.js";
 
-const initialState = {
-    gifSearchReducer: gifSearchReducerInitial,
-  
-};
 
 // Redux: Root Reducer
 const rootReducer = combineReducers({
     gifSearchReducer: gifSearchReducer,
- 
+    userReducer: userReducer
 });
 // Exports
 export default rootReducer;

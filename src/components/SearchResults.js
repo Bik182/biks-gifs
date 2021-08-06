@@ -5,7 +5,7 @@ import loadingGif from "../assets/minion.gif";
 import moreGif from "../assets/more.gif";
 import GifImage from "./GifImage";
 
-import searchStyle from "./searchStyles.scss";
+import searchStyle from "./styles/searchStyles.scss";
 const SearchResults = (props) => {
   const [displayStill, setDisplay] = useState(true);
   let title =

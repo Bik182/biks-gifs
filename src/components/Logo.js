@@ -1,6 +1,6 @@
 import React from "react";
 import useWindowDimensions from "./WindowDimensions.js";
-
+import "./styles/logo.scss";
 const Logo = (props) => {
   const { windowWidth } = useWindowDimensions();
 

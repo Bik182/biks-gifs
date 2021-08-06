@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-//import '../main.scss';
+import "./styles/searchStyles.scss";
 const Search = (props) => {
   const handleKeyUp = (event) => {
     if (event.key === "Enter") {
