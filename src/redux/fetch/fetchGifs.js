@@ -13,6 +13,7 @@ import {
 import config from "../../config.js";
 import {parseTrending } from "../helpers/CombineGifs";
 export function fetchGifs() {
+  console.log("HEY");
   return (dispatch) => {
     dispatch(fetchTrendingGifPending);
     fetch(

@@ -99,6 +99,7 @@ const GifDisplay = (props) => {
               still={obj.images.downsized_still.url}
               url={obj.url}
               key={obj.id}
+              shareUrl={obj.images.original.url}
               gifSize={gifSize}
             ></GifImage>
           ))}

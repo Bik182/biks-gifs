@@ -34,22 +34,12 @@ class Home extends React.Component {
   componentDidMount() {
     this.props.fetch();
     this.props.fetchInitialTerms(this.props.user.userTerms);
-    
-    window.addEventListener("resize", this.updateDimensions);
   }
-  updateDimensions = () => {
-    this.setState({ width: window.innerWidth, height: window.innerHeight });
-  };
+
   handleSearchEmpty = (textLength) => {
-    if (textLength <= 0) {
-      this.setState({
-        textIsEmpty: true,
-      });
-    } else {
-      this.setState({
-        textIsEmpty: false,
-      });
-    }
+    this.setState({
+      textIsEmpty: textLength <= 0 ? true : false,
+    });
   };
   searchMethod = (value) => {
     const newVal = value.replace(/\W/g, "").toLowerCase();
@@ -93,9 +83,7 @@ class Home extends React.Component {
     });
     this.props.removeTerm(term);
   };
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions);
-  }
+  componentWillUnmount() {}
   render() {
     return (
       <>
@@ -185,7 +173,6 @@ class Home extends React.Component {
                       gifSize={250}
                       marginAndPadding={20}
                       getMore={`https://giphy.com/trending`}
-                      // pending={this?.props?.gifs?.fetchTrendingGifPending}
                       data={this.props.gifs?.trendingData}
                     ></GifDisplay>
                   </div>
